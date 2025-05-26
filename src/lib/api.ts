@@ -1,6 +1,6 @@
 import { AttendeeResponse } from './types';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL
+const API_BASE_URL = "https://j8wow48gsgwwg4soggskc0kc.theoprathama.com"
 
 /**
  * Fetch attendee data by code
