@@ -60,13 +60,13 @@ export interface WeddingData {
 
 export const weddingData: WeddingData = {
   bride: {
-    nickname: "Eci",
+    nickname: "Gressy",
     fullName: "Gressy Lasria Silitonga",
     parentInfo: "Putri pertama dari",
     father: "Rexson Pernando Silitonga",
     mother: "Hayati Pelita Pasaribu",
     instagram: "gressychia_",
-    photo: "https://ext.same-assets.com/1904390701/233451041.jpeg"
+    photo: "/IMG_9226.JPG"
   },
   groom: {
     nickname: "Sho",
@@ -75,7 +75,7 @@ export const weddingData: WeddingData = {
     father: "Youji Kishimoto",
     mother: "Ikuyo Kishimoto",
     instagram: "",
-    photo: "https://ext.same-assets.com/1904390701/173693275.jpeg"
+    photo: "/IMG_9223.JPG"
   },
   events: {
     reception: {

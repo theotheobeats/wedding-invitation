@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { coupleNames } from '@/lib/wedding-data';
+import FloatingParticles from '../ui/FloatingParticles';
 
 export default function ThankYou() {
   return (
@@ -10,14 +11,17 @@ export default function ThankYou() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/20 z-10" />
         <Image
-          src="https://ext.same-assets.com/1904390701/173693275.jpeg"
+          src="/IMG_0491.JPG"
           alt="Background"
           fill
           className="object-cover"
         />
       </div>
+      
+      {/* Floating Particles */}
+      <FloatingParticles count={20} className="z-15" />
 
-      <div className="container-wedding relative z-10">
+      <div className="container-wedding relative z-20">
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}

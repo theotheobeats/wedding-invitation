@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { generateQRCode } from '@/lib/invitation-utils';
+import FloatingParticles from '../ui/FloatingParticles';
 
 interface InvitationQRProps {
   invitationUrl: string;
@@ -40,8 +41,11 @@ export default function InvitationQR({ invitationUrl, guestName, preGeneratedQR 
   if (!qrCode) return null;
 
   return (
-    <section className="py-12 sm:py-16">
-      <div className="container-wedding">
+    <section className="relative py-12 sm:py-16 overflow-hidden">
+      {/* Floating Particles */}
+      <FloatingParticles count={15} className="z-10" />
+      
+      <div className="container-wedding relative z-20">
         <motion.div
           className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8"
           initial={{ opacity: 0, y: 20 }}

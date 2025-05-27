@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { coupleNames } from '@/lib/wedding-data';
+import FloatingParticles from '../ui/FloatingParticles';
+import OptimizedImage from '../ui/ImageOptimized';
 
 interface HeroProps {
   onOpenInvitation: () => void;
@@ -13,7 +15,6 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: HeroProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [showQR, setShowQR] = useState(false);
 
   const flipCard = () => {
@@ -31,14 +32,17 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
     >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/60 z-10" />
-        <Image
-          src="https://ext.same-assets.com/1904390701/1604584469.jpeg"
-          alt="Wedding background"
-          fill
-          priority
-          className={`object-cover transition-opacity duration-700 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-          onLoad={() => setImageLoaded(true)}
-        />
+        <div className="absolute inset-0">
+          <OptimizedImage
+            src="/Gress-518.jpg"
+            alt="Wedding background"
+            fill
+            priority
+            className="object-cover"
+          />
+        </div>
+        {/* Floating Particles */}
+        <FloatingParticles count={30} className="z-15" />
       </div>
 
       <div className="container-wedding relative z-20 flex flex-col items-center justify-center min-h-screen py-8">

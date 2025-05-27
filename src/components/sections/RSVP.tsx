@@ -11,6 +11,7 @@ import { Checkbox } from "../ui/checkbox";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import FloatingParticles from '../ui/FloatingParticles';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -77,205 +78,318 @@ export default function RSVP() {
   }
 
   return (
-    <section className="section-padding py-20 bg-muted">
-      <div className="container-wedding">
+    <section className="relative section-padding py-20 bg-muted overflow-hidden">
+      {/* Floating Particles */}
+      <FloatingParticles count={20} className="z-10" />
+      
+      {/* Enhanced Decorative Background Elements */}
+      <div className="absolute top-20 left-8 w-80 h-80 border border-primary/8 rounded-full z-15 animate-pulse"></div>
+      <div className="absolute bottom-32 right-12 w-64 h-64 border border-secondary/10 rounded-full z-15 animate-pulse delay-1000"></div>
+      <div className="absolute top-1/2 right-8 w-40 h-40 border border-primary/6 rounded-full z-15 animate-pulse delay-500"></div>
+      
+      <div className="container-wedding relative z-20">
+        {/* Enhanced Header Section */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mb-16 sm:mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <div className="flex justify-center mb-4">
-            <Image
-              src="https://ext.same-assets.com/1904390701/1788928505.svg"
-              alt="RSVP"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <Image
-              src="https://ext.same-assets.com/1904390701/857206430.svg"
-              alt="RSVP"
-              width={40}
-              height={40}
-            />
-          </div>
-          <h2 className="section-title">RSVP, Doa & Ucapan</h2>
-          <p className="max-w-lg mx-auto mb-8">
+          <motion.div
+            className="flex justify-center mb-8"
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="relative">
+              <Image
+                src="https://ext.same-assets.com/1904390701/1788928505.svg"
+                alt="RSVP"
+                width={50}
+                height={50}
+                className="mr-3 opacity-80"
+              />
+              <Image
+                src="https://ext.same-assets.com/1904390701/857206430.svg"
+                alt="RSVP"
+                width={50}
+                height={50}
+                className="opacity-80"
+              />
+            </div>
+          </motion.div>
+          
+          <motion.h2 
+            className="section-title mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            RSVP, Doa & Ucapan
+          </motion.h2>
+          
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            viewport={{ once: true }}
+          >
             Doakan dan berikan ucapan terbaik untuk Kami di hari pernikahan
-          </p>
+          </motion.p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Form */}
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Enhanced Form Section */}
           <motion.div
-            className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6"
-            initial={{ opacity: 0, x: -20 }}
+            className="order-2 lg:order-1"
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-playfair text-xl mb-6 text-center">Konfirmasi Kehadiran</h3>
-
-            <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nama</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="attendance"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Konfirmasi Kehadiran</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select attendance" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="attending">Hadir</SelectItem>
-                          <SelectItem value="not-attending">Tidak Hadir</SelectItem>
-                          <SelectItem value="not-sure">Belum Pasti</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="guests"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Jumlah Tamu</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select number of guests" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="1">1 orang</SelectItem>
-                          <SelectItem value="2">2 orang</SelectItem>
-                          <SelectItem value="3">3 orang</SelectItem>
-                          <SelectItem value="4">4 orang</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Ucapan & Doa</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Write your message" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="terms"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                      <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          Saya menyetujui bahwa ucapan saya akan ditampilkan
-                        </FormLabel>
-                      </div>
-                    </FormItem>
-                  )}
-                />
-
-                <Button
-                  type="submit"
-                  className="w-full bg-primary text-white hover:bg-primary/90"
-                  disabled={isSubmitted}
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-500">
+              {/* Form Header */}
+              <div className="text-center mb-8">
+                <motion.div
+                  className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center"
+                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  transition={{ duration: 0.8 }}
                 >
-                  {isSubmitted ? "Terkirim!" : "Kirim Ucapan"}
-                </Button>
-              </form>
-            </Form>
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor"/>
+                  </svg>
+                </motion.div>
+                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">Konfirmasi Kehadiran</h3>
+                <p className="text-gray-600">Mohon konfirmasi kehadiran Anda</p>
+              </div>
+
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">Nama Lengkap</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="Masukkan nama lengkap" 
+                            {...field} 
+                            className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary transition-colors"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="attendance"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">Konfirmasi Kehadiran</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
+                              <SelectValue placeholder="Pilih konfirmasi kehadiran" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="attending">✅ Hadir</SelectItem>
+                            <SelectItem value="not-attending">❌ Tidak Hadir</SelectItem>
+                            <SelectItem value="not-sure">🤔 Belum Pasti</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="guests"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">Jumlah Tamu</FormLabel>
+                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                          <FormControl>
+                            <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
+                              <SelectValue placeholder="Pilih jumlah tamu" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="1">1 orang</SelectItem>
+                            <SelectItem value="2">2 orang</SelectItem>
+                            <SelectItem value="3">3 orang</SelectItem>
+                            <SelectItem value="4">4+ orang</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">Ucapan & Doa</FormLabel>
+                        <FormControl>
+                          <textarea 
+                            placeholder="Tulis ucapan dan doa terbaik untuk kami..."
+                            {...field}
+                            rows={4}
+                            className="w-full rounded-xl border-2 border-gray-200 focus:border-primary transition-colors p-4 resize-none"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="terms"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 bg-gray-50 rounded-xl">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            className="mt-1"
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel className="text-sm">
+                            Saya menyetujui bahwa ucapan saya akan ditampilkan di website ini
+                          </FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <Button
+                      type="submit"
+                      className="w-full h-14 bg-gradient-to-r from-primary to-secondary text-white hover:shadow-xl transition-all duration-300 font-semibold text-lg rounded-xl"
+                      disabled={isSubmitted}
+                    >
+                      {isSubmitted ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Mengirim...
+                        </>
+                      ) : (
+                        <>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+                            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Kirim Ucapan
+                        </>
+                      )}
+                    </Button>
+                  </motion.div>
+                </form>
+              </Form>
+            </div>
           </motion.div>
 
-          {/* Wishes List */}
+          {/* Enhanced Wishes List Section */}
           <motion.div
-            className="w-full lg:w-1/2 bg-white rounded-lg shadow-md p-6"
-            initial={{ opacity: 0, x: 20 }}
+            className="order-1 lg:order-2"
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <h3 className="font-playfair text-xl mb-6 text-center">Ucapan & Doa ({wishes.length})</h3>
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 lg:p-10 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-500">
+              {/* Wishes Header */}
+              <div className="text-center mb-8">
+                <motion.div
+                  className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center"
+                  whileHover={{ scale: 1.1, rotate: -360 }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor"/>
+                  </svg>
+                </motion.div>
+                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">Ucapan & Doa</h3>
+                <p className="text-gray-600">({wishes.length} ucapan dari tamu</p>
+              </div>
 
-            <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2">
-              {wishes.map((wish) => (
-                <div key={wish.id} className="border-b pb-4">
-                  <div className="flex items-center mb-2">
-                    <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center mr-3">
-                      <Image
-                        src="https://ext.same-assets.com/1904390701/3530049520.png"
-                        alt="User"
-                        width={24}
-                        height={24}
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-medium">{wish.name}</h4>
-                      <div className="flex items-center">
-                        <Image
-                          src={wish.attendance === 'attending'
-                            ? "https://ext.same-assets.com/1904390701/499135800.svg"
-                            : "https://ext.same-assets.com/1904390701/1098630549.svg"}
-                          alt="Attendance"
-                          width={16}
-                          height={16}
-                          className="mr-1"
-                        />
-                        <span className="text-xs text-muted-foreground">
-                          {wish.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
-                        </span>
+              {/* Wishes List with Enhanced Design */}
+              <div className="space-y-6 max-h-[400px] lg:max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                {wishes.map((wish, index) => (
+                  <motion.div 
+                    key={wish.id} 
+                    className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <div className="flex items-start mb-4">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4 shadow-lg">
+                        <span className="text-white font-bold text-lg">{wish.name.charAt(0).toUpperCase()}</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold text-lg text-primary">{wish.name}</h4>
+                          <div className="flex items-center bg-white rounded-full px-3 py-1 shadow-sm">
+                            <div className={`w-2 h-2 rounded-full mr-2 ${wish.attendance === 'attending' ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                            <span className="text-xs font-medium">
+                              {wish.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
+                            </span>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <p className="text-sm mb-1">{wish.message}</p>
-                  <span className="text-xs text-muted-foreground">{wish.date}</span>
-                </div>
-              ))}
-            </div>
+                    <p className="text-gray-700 mb-3 leading-relaxed">{wish.message}</p>
+                    <span className="text-xs text-gray-500 font-medium">{wish.date}</span>
+                  </motion.div>
+                ))}
+              </div>
 
-            <div className="text-center mt-8 pt-4 border-t">
-              <p className="text-sm italic">
-                "Semoga Allah memberkahimu dan memberkahi apa yang menjadi tanggung jawabmu, serta menyatukan kalian berdua dalam kebaikan."
-              </p>
+              {/* Bible Quote Section */}
+              <motion.div 
+                className="mt-8 pt-6 border-t border-gray-200"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6">
+                  <motion.div
+                    className="w-12 h-12 mx-auto mb-4 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                      <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </motion.div>
+                  <p className="font-playfair text-lg md:text-xl text-primary italic leading-relaxed mb-3">
+                    "Love is patient, love is kind. It does not envy, it does not boast, it is not proud."
+                  </p>
+                  <p className="text-sm text-gray-600 font-semibold">
+                    - 1 Corinthians 13:4
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>

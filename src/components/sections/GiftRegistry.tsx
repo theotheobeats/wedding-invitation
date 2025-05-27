@@ -5,12 +5,13 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { weddingData } from '@/lib/wedding-data';
+import FloatingParticles from '../ui/FloatingParticles';
 
 const bankAccounts = [
   {
     id: 1,
     name: weddingData.digitalGift.accountName,
-    bank: 'https://ext.same-assets.com/1904390701/2004770079.png', // BNI logo placeholder
+    bank: 'https://ext.same-assets.com/1904390701/2004770080.png', // BNI logo
     bankName: weddingData.digitalGift.bank,
     accountNumber: weddingData.digitalGift.accountNumber,
   }
@@ -26,8 +27,11 @@ export default function GiftRegistry() {
   };
 
   return (
-    <section className="section-padding py-20">
-      <div className="container-wedding">
+    <section className="relative section-padding py-20 overflow-hidden">
+      {/* Floating Particles */}
+      <FloatingParticles count={16} className="z-10" />
+      
+      <div className="container-wedding relative z-20">
         <motion.div
           className="text-center mb-10"
           initial={{ opacity: 0, y: 20 }}
@@ -66,18 +70,7 @@ export default function GiftRegistry() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center justify-center mb-6 sm:mb-8">
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                  <Image
-                    src={account.bank}
-                    alt={account.bankName}
-                      width={80}
-                      height={50}
-                    className="object-contain"
-                  />
-                  </div>
-                </div>
-
+               
                 <div className="text-center mb-6 sm:mb-8 space-y-3">
                   <h3 className="font-playfair text-xl sm:text-2xl md:text-3xl text-primary">{account.bankName}</h3>
                   <h4 className="font-montserrat text-lg sm:text-xl text-gray-700">{account.name}</h4>
