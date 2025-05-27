@@ -19,7 +19,7 @@ export default function ThankYou() {
       </div>
       
       {/* Floating Particles */}
-      <FloatingParticles count={20} className="z-15" />
+      <FloatingParticles count={8} className="z-15" />
 
       <div className="container-wedding relative z-20">
         <motion.div

@@ -22,7 +22,7 @@ export default function SaveTheDate() {
       </div>
       
       {/* Floating Particles */}
-      <FloatingParticles count={25} className="z-15" />
+      <FloatingParticles count={10} className="z-15" />
 
       {/* Decorative Elements */}
       <div className="absolute top-10 left-10 w-32 h-32 border border-white/20 rounded-full z-15 animate-pulse"></div>

@@ -42,7 +42,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
           />
         </div>
         {/* Floating Particles */}
-        <FloatingParticles count={30} className="z-15" />
+        <FloatingParticles count={12} className="z-15" />
       </div>
 
       <div className="container-wedding relative z-20 flex flex-col items-center justify-center min-h-screen py-8">

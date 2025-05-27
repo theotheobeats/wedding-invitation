@@ -43,7 +43,7 @@ export default function InvitationQR({ invitationUrl, guestName, preGeneratedQR 
   return (
     <section className="relative py-12 sm:py-16 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={15} className="z-10" />
+      <FloatingParticles count={6} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div

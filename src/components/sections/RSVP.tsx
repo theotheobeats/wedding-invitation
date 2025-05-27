@@ -80,7 +80,7 @@ export default function RSVP() {
   return (
     <section className="relative section-padding py-20 bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={20} className="z-10" />
+      <FloatingParticles count={8} className="z-10" />
       
       {/* Enhanced Decorative Background Elements */}
       <div className="absolute top-20 left-8 w-80 h-80 border border-primary/8 rounded-full z-15 animate-pulse"></div>

@@ -44,7 +44,7 @@ export default function LoveStory() {
   return (
     <section className="relative section-padding py-20 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={18} className="z-10" />
+      <FloatingParticles count={8} className="z-10" />
       
       {/* Enhanced Decorative Background Elements */}
       <div className="absolute top-32 left-8 w-64 h-64 border border-primary/10 rounded-full z-15 animate-pulse"></div>

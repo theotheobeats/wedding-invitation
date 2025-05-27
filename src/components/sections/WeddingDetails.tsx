@@ -9,7 +9,7 @@ export default function WeddingDetails() {
   return (
     <section className="relative section-padding bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={22} className="z-10" />
+      <FloatingParticles count={8} className="z-10" />
 
       {/* Decorative Elements */}
       <div className="absolute top-20 right-10 w-40 h-40 border border-primary/20 rounded-full z-15 animate-pulse"></div>

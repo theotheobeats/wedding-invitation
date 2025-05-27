@@ -10,7 +10,7 @@ export default function CoupleIntro() {
   return (
     <section className="relative section-padding bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={25} className="z-10" />
+      <FloatingParticles count={10} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div
@@ -28,7 +28,7 @@ export default function CoupleIntro() {
               height={30}
               className="mx-auto mb-6 opacity-70"
             />
-            <h2 className="text-4xl max-w-4xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl max-w-4xl mx-auto">
               Tanpa mengurangi rasa hormat, kami bermaksud mengundang Bapak/Ibu/Saudara/I untuk menghadiri acara pernikahan kami.
             </h2>
           </div>

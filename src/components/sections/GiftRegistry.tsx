@@ -29,7 +29,7 @@ export default function GiftRegistry() {
   return (
     <section className="relative section-padding py-20 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={16} className="z-10" />
+      <FloatingParticles count={6} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div
