@@ -44,7 +44,7 @@ export default function LoveStory() {
   return (
     <section className="relative section-padding py-20 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={8} className="z-10" />
+      <FloatingParticles count={4} className="z-10" />
       
       {/* Enhanced Decorative Background Elements */}
       <div className="absolute top-32 left-8 w-64 h-64 border border-primary/10 rounded-full z-15 animate-pulse"></div>
@@ -55,9 +55,9 @@ export default function LoveStory() {
         {/* Enhanced Header Section */}
         <motion.div
           className="text-center mb-20 sm:mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <motion.div

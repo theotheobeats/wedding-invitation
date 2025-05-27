@@ -22,7 +22,7 @@ export default function SaveTheDate() {
       </div>
       
       {/* Floating Particles */}
-      <FloatingParticles count={10} className="z-15" />
+      <FloatingParticles count={5} className="z-15" />
 
       {/* Decorative Elements */}
       <div className="absolute top-10 left-10 w-32 h-32 border border-white/20 rounded-full z-15 animate-pulse"></div>
@@ -33,9 +33,9 @@ export default function SaveTheDate() {
         {/* Header Section with Enhanced Styling */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <motion.div

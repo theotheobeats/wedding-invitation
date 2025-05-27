@@ -43,14 +43,14 @@ export default function InvitationQR({ invitationUrl, guestName, preGeneratedQR 
   return (
     <section className="relative py-12 sm:py-16 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={6} className="z-10" />
+      <FloatingParticles count={3} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div
           className="max-w-md mx-auto bg-white rounded-xl shadow-lg p-6 sm:p-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <div className="text-center mb-6">

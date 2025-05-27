@@ -30,29 +30,16 @@ export default function Gallery() {
   return (
     <section className="relative section-padding py-20 bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={8} className="z-10" />
+      <FloatingParticles count={4} className="z-10" />
 
-      {/* Enhanced Decorative Background Elements */}
-      <div className="absolute top-20 right-8 w-96 h-96 border border-primary/8 rounded-full z-15 animate-pulse"></div>
-      <div className="absolute bottom-32 left-12 w-64 h-64 border border-secondary/10 rounded-full z-15 animate-pulse delay-1000"></div>
-      <div className="absolute top-1/2 left-8 w-40 h-40 border border-primary/6 rounded-full z-15 animate-pulse delay-500"></div>
+      {/* Simplified Decorative Background Elements */}
+      <div className="absolute top-20 right-8 w-96 h-96 border border-primary/8 rounded-full z-15"></div>
+      <div className="absolute bottom-32 left-12 w-64 h-64 border border-secondary/10 rounded-full z-15"></div>
 
       <div className="container-wedding relative z-20">
-        {/* Enhanced Header Section */}
-        <motion.div
-          className="text-center mb-20 sm:mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
+        {/* Minimal Header Section */}
+        <div className="text-center mb-20 sm:mb-24">
+          <div className="mb-8">
             <Image
               src="https://ext.same-assets.com/1904390701/1875536406.svg"
               alt="Gallery"
@@ -60,52 +47,25 @@ export default function Gallery() {
               height={40}
               className="mx-auto opacity-80"
             />
-          </motion.div>
+          </div>
 
-          <motion.h2
-            className="section-title mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="section-title mb-4">
             Mini Gallery
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
             Sebuah kumpulan momen indah dari perjalanan cinta Eci & Sho
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        {/* Normal Grid Layout */}
-        <motion.div
-          className="max-w-6xl mx-auto"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
+        {/* Simplified Grid Layout */}
+        <div className="max-w-6xl mx-auto">
           {/* Responsive Grid: 2 columns mobile, 3 tablet, 4 desktop */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {galleryImages.map((image, index) => (
-              <motion.div
+            {galleryImages.map((image) => (
+              <div
                 key={image.id}
-                className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
-                initial={{ opacity: 0, scale: 0.8, y: 40 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.05,
-                  type: "spring",
-                  stiffness: 120
-                }}
-                viewport={{ once: true, margin: "-50px" }}
+                className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
                 onClick={() => setSelectedImage(image.src)}
               >
                 {/* Clean container with subtle border */}
@@ -114,9 +74,9 @@ export default function Gallery() {
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                       style={{
-                        objectPosition: index % 3 === 0 ? 'center 30%' : index % 3 === 1 ? 'center 20%' : 'center center'
+                        objectPosition: 'center center'
                       }}
                       loading="lazy"
                       onError={(e) => {
@@ -125,53 +85,32 @@ export default function Gallery() {
                       }}
                     />
 
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    {/* Simplified overlay on hover */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                    {/* Hover content */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0">
+                    {/* Minimal hover content */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="text-center text-white">
-                        <motion.div
-                          className="w-14 h-14 mx-auto mb-3 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
-                          whileHover={{ scale: 1.1, rotate: 180 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div className="w-12 h-12 mx-auto mb-2 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3h4a2 2 0 0 1 2 2v4m-6 0L21 3m-11 18h-4a2 2 0 0 1-2-2v-4m6 0L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
-                        </motion.div>
+                        </div>
                         <p className="text-sm font-medium">View Photo</p>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                å
-              </motion.div>
+              </div>
             ))}
           </div>
+        </div>
 
-          {/* View All Button */}
-          <motion.div
-            className="text-center mt-12 lg:mt-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            viewport={{ once: true }}
-          >
-          </motion.div>
-        </motion.div>
-
-        {/* Enhanced Dialog */}
+        {/* Simplified Dialog */}
         <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
           <DialogContent className="max-w-5xl p-2 bg-black/90 backdrop-blur-md border border-white/10 rounded-3xl">
             {selectedImage && (
-              <motion.div
-                className="relative w-full h-[85vh] rounded-2xl overflow-hidden"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.3 }}
-              >
+              <div className="relative w-full h-[85vh] rounded-2xl overflow-hidden">
                 <img
                   src={selectedImage}
                   alt="Gallery preview"
@@ -179,17 +118,15 @@ export default function Gallery() {
                 />
 
                 {/* Close button */}
-                <motion.button
-                  className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+                <button
+                  className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors duration-200"
                   onClick={() => setSelectedImage(null)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
-                </motion.button>
-              </motion.div>
+                </button>
+              </div>
             )}
           </DialogContent>
         </Dialog>

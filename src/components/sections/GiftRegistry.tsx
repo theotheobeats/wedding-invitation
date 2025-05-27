@@ -29,14 +29,14 @@ export default function GiftRegistry() {
   return (
     <section className="relative section-padding py-20 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={6} className="z-10" />
+      <FloatingParticles count={3} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div
           className="text-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <h2 className="section-title">Hadiah Pernikahan</h2>

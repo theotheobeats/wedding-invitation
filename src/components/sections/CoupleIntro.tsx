@@ -10,14 +10,14 @@ export default function CoupleIntro() {
   return (
     <section className="relative section-padding bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={10} className="z-10" />
+      <FloatingParticles count={5} className="z-10" />
       
       <div className="container-wedding relative z-20">
         <motion.div
           className="text-center mb-16 sm:mb-20 md:mb-24"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <div className="relative">

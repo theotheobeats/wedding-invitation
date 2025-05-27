@@ -9,7 +9,7 @@ export default function WeddingDetails() {
   return (
     <section className="relative section-padding bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={8} className="z-10" />
+      <FloatingParticles count={4} className="z-10" />
 
       {/* Decorative Elements */}
       <div className="absolute top-20 right-10 w-40 h-40 border border-primary/20 rounded-full z-15 animate-pulse"></div>
@@ -20,9 +20,9 @@ export default function WeddingDetails() {
         {/* Enhanced Header */}
         <motion.div
           className="text-center mb-16 sm:mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <motion.div
@@ -72,8 +72,8 @@ export default function WeddingDetails() {
                   {/* Event Icon */}
                   <motion.div
                     className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center shadow-lg"
-                    whileHover={{ scale: 1.1, rotate: 360 }}
-                    transition={{ duration: 0.8 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                       <path d="M20 6v2H4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2zm-2 12a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-6h12v6z" fill="currentColor" />
@@ -152,8 +152,8 @@ export default function WeddingDetails() {
                   {/* Event Icon */}
                   <motion.div
                     className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center shadow-lg"
-                    whileHover={{ scale: 1.1, rotate: -360 }}
-                    transition={{ duration: 0.8 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
                   >
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                       <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z" fill="currentColor" />

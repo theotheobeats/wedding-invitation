@@ -80,7 +80,7 @@ export default function RSVP() {
   return (
     <section className="relative section-padding py-20 bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={8} className="z-10" />
+      <FloatingParticles count={4} className="z-10" />
       
       {/* Enhanced Decorative Background Elements */}
       <div className="absolute top-20 left-8 w-80 h-80 border border-primary/8 rounded-full z-15 animate-pulse"></div>
@@ -91,9 +91,9 @@ export default function RSVP() {
         {/* Enhanced Header Section */}
         <motion.div
           className="text-center mb-16 sm:mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <motion.div
@@ -156,8 +156,8 @@ export default function RSVP() {
               <div className="text-center mb-8">
                 <motion.div
                   className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: 360 }}
-                  transition={{ duration: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor"/>
@@ -319,8 +319,8 @@ export default function RSVP() {
               <div className="text-center mb-8">
                 <motion.div
                   className="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center"
-                  whileHover={{ scale: 1.1, rotate: -360 }}
-                  transition={{ duration: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor"/>

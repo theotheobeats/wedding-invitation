@@ -19,14 +19,14 @@ export default function ThankYou() {
       </div>
       
       {/* Floating Particles */}
-      <FloatingParticles count={8} className="z-15" />
+      <FloatingParticles count={4} className="z-15" />
 
       <div className="container-wedding relative z-20">
         <motion.div
           className="text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.3, ease: "linear" }}
           viewport={{ once: true }}
         >
           <Image
@@ -47,22 +47,7 @@ export default function ThankYou() {
             <h4 className="font-playfair text-2xl md:text-3xl">{coupleNames}</h4>
           </div>
 
-          <div className="mt-12 text-center">
-            <a
-              href="https://truelove.my.id/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white hover:text-white/90"
-            >
-              <Image
-                src="https://ext.same-assets.com/1904390701/940335937.png"
-                alt="True Love"
-                width={30}
-                height={30}
-              />
-              <span className="font-medium">Mau Pesan Juga...? klik disini</span>
-            </a>
-          </div>
+          
         </motion.div>
       </div>
     </section>
