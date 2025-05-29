@@ -34,7 +34,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
         <div className="absolute inset-0 bg-black/60 z-10" />
         <div className="absolute inset-0">
           <OptimizedImage
-            src="/Gress-518.jpg"
+            src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt"
             alt="Wedding background"
             fill
             priority

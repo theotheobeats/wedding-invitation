@@ -7,21 +7,21 @@ import { Dialog, DialogContent } from '../ui/dialog';
 import FloatingParticles from '../ui/FloatingParticles';
 
 const galleryImages = [
-  { id: 1, src: '/IMG_0195.JPG', alt: 'Eci & Sho Wedding Photo 1' },
-  { id: 2, src: '/IMG_0211.JPG', alt: 'Eci & Sho Wedding Photo 2' },
-  { id: 3, src: '/IMG_0234.JPG', alt: 'Eci & Sho Wedding Photo 3' },
-  { id: 4, src: '/IMG_0237.JPG', alt: 'Eci & Sho Wedding Photo 4' },
-  { id: 5, src: '/IMG_0307.JPG', alt: 'Eci & Sho Wedding Photo 5' },
-  { id: 6, src: '/IMG_0321.JPG', alt: 'Eci & Sho Wedding Photo 6' },
-  { id: 7, src: '/IMG_0338.JPG', alt: 'Eci & Sho Wedding Photo 7' },
-  { id: 8, src: '/IMG_0380.JPG', alt: 'Eci & Sho Wedding Photo 8' },
-  { id: 9, src: '/IMG_0427.JPG', alt: 'Eci & Sho Wedding Photo 9' },
-  { id: 10, src: '/IMG_8700.JPG', alt: 'Eci & Sho Wedding Photo 10' },
-  { id: 11, src: '/IMG_9223.JPG', alt: 'Eci & Sho Wedding Photo 11' },
-  { id: 12, src: '/IMG_9226.JPG', alt: 'Eci & Sho Wedding Photo 12' },
-  { id: 13, src: '/IMG_9798.JPG', alt: 'Eci & Sho Wedding Photo 13' },
-  { id: 14, src: '/IMG_9823.JPG', alt: 'Eci & Sho Wedding Photo 14' },
-  { id: 15, src: '/Gress-518.jpg', alt: 'Eci & Sho Wedding Photo 15' },
+  { id: 1, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S', alt: 'Eci & Sho Wedding Photo 1' },
+  { id: 2, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', alt: 'Eci & Sho Wedding Photo 2' },
+  { id: 3, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbPqTfVnaKYEQifNSdbP93UCpFHJz8qLxrV6kw', alt: 'Eci & Sho Wedding Photo 3' },
+  { id: 4, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', alt: 'Eci & Sho Wedding Photo 4' },
+  { id: 5, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb1R0sC67wJ6qlUnQodXTDOF3CVNWcZxgpuGHY', alt: 'Eci & Sho Wedding Photo 5' },
+  { id: 6, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbrPcgnueJMC1D4ZGeypxH9Et8vfPNuwAVXncB', alt: 'Eci & Sho Wedding Photo 6' },
+  { id: 7, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', alt: 'Eci & Sho Wedding Photo 7' },
+  { id: 8, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbLVL5SS3Aw08W2p3ymD7SOME1tFndlXzCor4L', alt: 'Eci & Sho Wedding Photo 8' },
+  { id: 9, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb6SORMH1lLCHBIuoynfra1WU4bOcJNki3SeKY', alt: 'Eci & Sho Wedding Photo 9' },
+  { id: 10, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbfjDn622cDTkzlAW62qsMLYewuH5NCUx7mFXE', alt: 'Eci & Sho Wedding Photo 10' },
+  { id: 11, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbGshH14OCfFdA9jbwVolHW4nXs8pSuROYk06e', alt: 'Eci & Sho Wedding Photo 11' },
+  { id: 12, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbIQBtJjXaKL9NjAoB0Z6CYvwbuVFQWUXzxqIe', alt: 'Eci & Sho Wedding Photo 12' },
+  { id: 13, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbrPcgnueJMC1D4ZGeypxH9Et8vfPNuwAVXncB', alt: 'Eci & Sho Wedding Photo 13' },
+  { id: 14, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbTIXKZxR9mxsjAhVcWMKYR2npEbzBU7fv89qG', alt: 'Eci & Sho Wedding Photo 14' },
+  { id: 15, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', alt: 'Eci & Sho Wedding Photo 15' },
 ];
 
 export default function Gallery() {
@@ -81,7 +81,7 @@ export default function Gallery() {
                       loading="lazy"
                       onError={(e) => {
                         console.error('Gallery image failed to load:', image.src);
-                        e.currentTarget.src = '/Gress-518.jpg';
+                        e.currentTarget.src = 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt';
                       }}
                     />
 

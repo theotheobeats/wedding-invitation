@@ -66,7 +66,7 @@ export const weddingData: WeddingData = {
     father: "Rexson Pernando Silitonga",
     mother: "Hayati Pelita Pasaribu",
     instagram: "gressychia_",
-    photo: "/IMG_9226.JPG"
+    photo: "https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbIQBtJjXaKL9NjAoB0Z6CYvwbuVFQWUXzxqIe"
   },
   groom: {
     nickname: "Sho",
@@ -75,7 +75,7 @@ export const weddingData: WeddingData = {
     father: "Youji Kishimoto",
     mother: "Ikuyo Kishimoto",
     instagram: "",
-    photo: "/IMG_9223.JPG"
+    photo: "https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbGshH14OCfFdA9jbwVolHW4nXs8pSuROYk06e"
   },
   events: {
     reception: {

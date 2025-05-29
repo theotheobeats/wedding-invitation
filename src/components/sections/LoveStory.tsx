@@ -11,7 +11,7 @@ const timelineItems = [
     title: weddingData.loveStory.meeting.title,
     date: weddingData.loveStory.meeting.date,
     description: weddingData.loveStory.meeting.description,
-    image: '/IMG_0491.JPG',
+    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbThibf49mxsjAhVcWMKYR2npEbzBU7fv89qG4',
     icon: 'https://ext.same-assets.com/1904390701/1199203718.svg'
   },
   {
@@ -19,7 +19,7 @@ const timelineItems = [
     title: weddingData.loveStory.commitment.title,
     date: weddingData.loveStory.commitment.date,
     description: weddingData.loveStory.commitment.description,
-    image: '/IMG_0307.JPG',
+    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb1R0sC67wJ6qlUnQodXTDOF3CVNWcZxgpuGHY',
     icon: 'https://ext.same-assets.com/1904390701/3273214577.svg'
   },
   {
@@ -27,7 +27,7 @@ const timelineItems = [
     title: weddingData.loveStory.engagement.title,
     date: weddingData.loveStory.engagement.date,
     description: weddingData.loveStory.engagement.description,
-    image: '/IMG_9790.JPG',
+    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbTjPdo39mxsjAhVcWMKYR2npEbzBU7fv89qG4',
     icon: 'https://ext.same-assets.com/1904390701/1873535483.svg'
   },
   {
@@ -35,7 +35,7 @@ const timelineItems = [
     title: 'Menikah',
     date: 'Juni 2025',
     description: `Akhirnya hari yang ditunggu-tunggu tiba! ${coupleNames} akan mengadakan pernikahan yang indah dan penuh berkah. Sebuah perjalanan cinta yang dimulai dari kantor di Osaka, Jepang, kini akan berlanjut ke jenjang yang lebih sakral.`,
-    image: '/IMG_0419.JPG',
+    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXerHo9ugDL7tpu5Zbrw18K2ojNhVncqIzeF6',
     icon: 'https://ext.same-assets.com/1904390701/3280192825.svg'
   }
 ];
@@ -151,8 +151,6 @@ export default function LoveStory() {
                   </motion.div>
                 </div>
 
-           
-
                 {/* Enhanced Image Section */}
                 <div className="w-full md:w-5/12">
                   <motion.div
@@ -170,11 +168,11 @@ export default function LoveStory() {
                         onError={(e) => {
                           console.error('Image failed to load:', item.image);
                           console.error('Error details:', e);
-                          // Try alternative path formats
+                          // Try alternative UploadThing URLs
                           const alternatives = [
-                            item.image.toLowerCase(),
-                            item.image.replace('.JPG', '.jpg'),
-                            '/Gress-518.jpg' // Known working image
+                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', // Gress-518.jpg
+                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', // IMG_0338.JPG
+                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S'  // IMG_0195.JPG
                           ];
                           const currentSrc = e.currentTarget.src;
                           const nextAlt = alternatives.find(alt => !currentSrc.includes(alt));

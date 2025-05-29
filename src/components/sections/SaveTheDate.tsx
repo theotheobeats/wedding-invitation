@@ -14,7 +14,7 @@ export default function SaveTheDate() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-black/40 to-black/60 z-10" />
         <Image
-          src="/IMG_0448.JPG"
+          src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
           alt="Background pattern"
           fill
           className="object-cover"
@@ -110,7 +110,7 @@ export default function SaveTheDate() {
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-primary p-[2px] rounded-3xl">
                 <div className="bg-black rounded-3xl h-full w-full overflow-hidden">
                   <Image
-                    src="/IMG_0454.JPG"
+                    src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
                     alt="Save the date main"
                     fill
                     className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -139,7 +139,7 @@ export default function SaveTheDate() {
             >
               <div className="aspect-square relative">
                 <Image
-                  src="/IMG_0448.JPG"
+                  src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
                   alt="Save the date 2"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -157,7 +157,7 @@ export default function SaveTheDate() {
             >
               <div className="aspect-square relative">
                 <Image
-                  src="/IMG_0432.JPG"
+                  src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXerHo9ugDL7tpu5Zbrw18K2ojNhVncqIzeF6"
                   alt="Save the date 3"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
@@ -176,7 +176,7 @@ export default function SaveTheDate() {
             >
               <div className="aspect-square relative">
                 <Image
-                  src="/IMG_0288.JPG"
+                  src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
                   alt="Save the date 4"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-700"

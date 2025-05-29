@@ -11,7 +11,7 @@ export default function ThankYou() {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/20 z-10" />
         <Image
-          src="/IMG_0491.JPG"
+          src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbThibf49mxsjAhVcWMKYR2npEbzBU7fv89qG4"
           alt="Background"
           fill
           className="object-cover"
