@@ -48,7 +48,7 @@ interface FloatingParticlesProps {
   className?: string;
 }
 
-export default function FloatingParticles({ count = 35, className = '' }: FloatingParticlesProps) {
+export default function FloatingParticles({ count = 25, className = '' }: FloatingParticlesProps) {
   const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
@@ -61,10 +61,10 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
           id: i,
           x: Math.random() * 100, // Percentage
           y: Math.random() * 100, // Percentage
-          size: Math.random() * 12 + 8, // 8-20px
+          size: Math.random() * 10 + 6, // 6-16px
           type: types[Math.floor(Math.random() * types.length)],
-          duration: Math.random() * 15 + 20, // 20-35 seconds
-          delay: Math.random() * 5, // 0-5 seconds delay
+          duration: Math.random() * 10 + 15, // 15-25 seconds
+          delay: Math.random() * 3, // 0-3 seconds delay
         });
       }
       
@@ -89,22 +89,22 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
           animate={{
             x: [
               `${particle.x}vw`, 
-              `${particle.x + Math.random() * 15 - 7.5}vw`,
-              `${particle.x + Math.random() * 20 - 10}vw`
+              `${particle.x + Math.random() * 10 - 5}vw`,
+              `${particle.x + Math.random() * 15 - 7.5}vw`
             ],
-            y: [`${particle.y + 20}vh`, `${particle.y - 30}vh`],
-            opacity: [0, 0.7, 0.5, 0],
+            y: [`${particle.y + 20}vh`, `${particle.y - 20}vh`],
+            opacity: [0, 0.6, 0.4, 0],
             scale: [0, 1, 0.8, 0],
-            rotate: [0, Math.random() * 180, Math.random() * 360],
+            rotate: [0, Math.random() * 90, Math.random() * 180],
           }}
           transition={{
             duration: particle.duration,
             delay: particle.delay,
             repeat: Infinity,
-            ease: "linear"
+            ease: "easeInOut"
           }}
           style={{
-            filter: 'drop-shadow(0 0 6px rgba(255, 255, 255, 0.3))',
+            filter: 'drop-shadow(0 0 4px rgba(255, 255, 255, 0.2))',
           }}
         >
           {particle.type === 'dot' 
@@ -114,8 +114,8 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
         </motion.div>
       ))}
       
-      {/* Simplified sparkles - reduced from 15 to 5 */}
-      {[...Array(5)].map((_, i) => (
+      {/* Simplified sparkles */}
+      {[...Array(3)].map((_, i) => (
         <motion.div
           key={`sparkle-${i}`}
           className="absolute"
@@ -125,14 +125,15 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
             opacity: 0,
           }}
           animate={{
-            opacity: [0, 0.8, 0],
-            scale: [0.5, 1.2, 0.5],
+            opacity: [0, 0.7, 0],
+            scale: [0.5, 1, 0.5],
           }}
           transition={{
-            duration: 2 + Math.random() * 1,
-            delay: Math.random() * 3,
+            duration: 3,
+            delay: Math.random() * 2,
             repeat: Infinity,
-            repeatDelay: Math.random() * 4 + 3,
+            repeatDelay: Math.random() * 3 + 2,
+            ease: "easeInOut"
           }}
         >
           <div 
@@ -140,41 +141,13 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
             style={{
               width: Math.random() * 2 + 1,
               height: Math.random() * 2 + 1,
-              boxShadow: '0 0 4px rgba(255, 255, 255, 0.6)',
+              boxShadow: '0 0 3px rgba(255, 255, 255, 0.5)',
             }}
           />
         </motion.div>
       ))}
       
-      {/* Reduced twinkle stars - from 8 to 3 */}
-      {[...Array(3)].map((_, i) => (
-        <motion.div
-          key={`star-${i}`}
-          className="absolute"
-          initial={{
-            x: `${Math.random() * 100}vw`,
-            y: `${Math.random() * 100}vh`,
-            opacity: 0,
-          }}
-          animate={{
-            opacity: [0, 0.8, 0],
-            rotate: [0, 180, 360],
-            scale: [0, 1.2, 0],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 1,
-            delay: Math.random() * 4,
-            repeat: Infinity,
-            repeatDelay: Math.random() * 6 + 4,
-          }}
-        >
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="rgba(255, 255, 255, 0.7)" />
-          </svg>
-        </motion.div>
-      ))}
-      
-      {/* Simplified glowing orbs - from 6 to 2 */}
+      {/* Gentle glowing orbs */}
       {[...Array(2)].map((_, i) => (
         <motion.div
           key={`orb-${i}`}
@@ -185,21 +158,21 @@ export default function FloatingParticles({ count = 35, className = '' }: Floati
             opacity: 0,
           }}
           animate={{
-            x: [`${30 + i * 40}vw`, `${35 + i * 40}vw`, `${25 + i * 40}vw`],
-            y: [`${20 + Math.random() * 60}vh`, `${30 + Math.random() * 40}vh`],
-            opacity: [0, 0.5, 0],
+            x: [`${30 + i * 40}vw`, `${32 + i * 40}vw`, `${28 + i * 40}vw`],
+            y: [`${20 + Math.random() * 60}vh`, `${25 + Math.random() * 50}vh`],
+            opacity: [0, 0.4, 0],
             scale: [0.5, 1, 0.5],
           }}
           transition={{
-            duration: 6 + Math.random() * 2,
-            delay: i * 2,
+            duration: 8,
+            delay: i * 3,
             repeat: Infinity,
-            ease: "linear",
+            ease: "easeInOut",
           }}
           style={{
-            width: 15 + Math.random() * 10,
-            height: 15 + Math.random() * 10,
-            background: `radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 182, 193, 0.2) 50%, transparent 70%)`,
+            width: 12 + Math.random() * 8,
+            height: 12 + Math.random() * 8,
+            background: `radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 182, 193, 0.1) 50%, transparent 70%)`,
             filter: 'blur(0.5px)',
           }}
         />

@@ -30,16 +30,28 @@ export default function Gallery() {
   return (
     <section className="relative section-padding py-20 bg-muted overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={4} className="z-10" />
+      <FloatingParticles count={3} className="z-10" />
 
       {/* Simplified Decorative Background Elements */}
       <div className="absolute top-20 right-8 w-96 h-96 border border-primary/8 rounded-full z-15"></div>
       <div className="absolute bottom-32 left-12 w-64 h-64 border border-secondary/10 rounded-full z-15"></div>
 
       <div className="container-wedding relative z-20">
-        {/* Minimal Header Section */}
-        <div className="text-center mb-20 sm:mb-24">
-          <div className="mb-8">
+        {/* Header Section */}
+        <motion.div 
+          className="text-center mb-20 sm:mb-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          viewport={{ once: true }}
+        >
+          <motion.div 
+            className="mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
+            viewport={{ once: true }}
+          >
             <Image
               src="https://ext.same-assets.com/1904390701/1875536406.svg"
               alt="Gallery"
@@ -47,34 +59,53 @@ export default function Gallery() {
               height={40}
               className="mx-auto opacity-80"
             />
-          </div>
+          </motion.div>
 
-          <h2 className="section-title mb-4">
+          <motion.h2 
+            className="section-title mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
+            viewport={{ once: true }}
+          >
             Mini Gallery
-          </h2>
+          </motion.h2>
 
-          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeInOut" }}
+            viewport={{ once: true }}
+          >
             Sebuah kumpulan momen indah dari perjalanan cinta Eci & Sho
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        {/* Simplified Grid Layout */}
+        {/* Gallery Grid */}
         <div className="max-w-6xl mx-auto">
-          {/* Responsive Grid: 2 columns mobile, 3 tablet, 4 desktop */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
-            {galleryImages.map((image) => (
-              <div
+            {galleryImages.map((image, index) => (
+              <motion.div
                 key={image.id}
-                className="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-transform duration-200 hover:scale-[1.02]"
+                className="relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-transform duration-300"
                 onClick={() => setSelectedImage(image.src)}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: "easeInOut" 
+                }}
+                viewport={{ once: true }}
+                whileTap={{ scale: 0.98 }}
               >
-                {/* Clean container with subtle border */}
                 <div className="relative w-full h-full bg-gradient-to-br from-primary/10 via-white to-secondary/10 p-[2px] rounded-2xl">
                   <div className="relative w-full h-full bg-white rounded-2xl overflow-hidden shadow-lg">
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover"
                       style={{
                         objectPosition: 'center center'
                       }}
@@ -85,11 +116,11 @@ export default function Gallery() {
                       }}
                     />
 
-                    {/* Simplified overlay on hover */}
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    {/* Simple overlay */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 hover:opacity-100"></div>
 
-                    {/* Minimal hover content */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Simple view icon */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
                       <div className="text-center text-white">
                         <div className="w-12 h-12 mx-auto mb-2 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -101,12 +132,12 @@ export default function Gallery() {
                     </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Simplified Dialog */}
+        {/* Dialog */}
         <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
           <DialogContent className="max-w-5xl p-2 bg-black/90 backdrop-blur-md border border-white/10 rounded-3xl">
             {selectedImage && (
@@ -117,7 +148,6 @@ export default function Gallery() {
                   className="w-full h-full object-contain"
                 />
 
-                {/* Close button */}
                 <button
                   className="absolute top-4 right-4 w-12 h-12 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/20 transition-colors duration-200"
                   onClick={() => setSelectedImage(null)}

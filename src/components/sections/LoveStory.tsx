@@ -44,26 +44,26 @@ export default function LoveStory() {
   return (
     <section className="relative section-padding py-20 overflow-hidden">
       {/* Floating Particles */}
-      <FloatingParticles count={4} className="z-10" />
+      <FloatingParticles count={3} className="z-10" />
       
-      {/* Enhanced Decorative Background Elements */}
-      <div className="absolute top-32 left-8 w-64 h-64 border border-primary/10 rounded-full z-15 animate-pulse"></div>
-      <div className="absolute bottom-40 right-12 w-48 h-48 border border-secondary/15 rounded-full z-15 animate-pulse delay-1000"></div>
-      <div className="absolute top-2/3 left-16 w-32 h-32 border border-primary/8 rounded-full z-15 animate-pulse delay-500"></div>
+      {/* Decorative Background Elements */}
+      <div className="absolute top-32 left-8 w-64 h-64 border border-primary/10 rounded-full z-15"></div>
+      <div className="absolute bottom-40 right-12 w-48 h-48 border border-secondary/15 rounded-full z-15"></div>
+      <div className="absolute top-2/3 left-16 w-32 h-32 border border-primary/8 rounded-full z-15"></div>
       
       <div className="container-wedding relative z-20">
-        {/* Enhanced Header Section */}
+        {/* Header Section */}
         <motion.div
           className="text-center mb-20 sm:mb-24"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.3, ease: "linear" }}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
           viewport={{ once: true }}
         >
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            whileInView={{ scale: 1, rotate: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
             viewport={{ once: true }}
             className="mb-8"
           >
@@ -80,7 +80,7 @@ export default function LoveStory() {
             className="section-title mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             Kisah Cinta
@@ -90,7 +90,7 @@ export default function LoveStory() {
             className="font-playfair text-xl md:text-2xl lg:text-3xl text-secondary"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             Kami Berdua
@@ -98,33 +98,37 @@ export default function LoveStory() {
         </motion.div>
 
         <div className="relative max-w-6xl mx-auto">
-          {/* Enhanced Timeline line with gradient */}
+          {/* Timeline line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-primary opacity-30 rounded-full hidden md:block"></div>
 
-          {/* Timeline items with enhanced design */}
+          {/* Timeline items */}
           <div className="relative z-10 space-y-20 md:space-y-32">
             {timelineItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.8, delay: index * 0.2, ease: "easeInOut" }}
                 viewport={{ once: true, margin: "-100px" }}
               >
                 {/* Content Card */}
                 <div className="w-full md:w-5/12 mb-8 md:mb-0">
                   <motion.div
-                    className={`bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50 hover:shadow-3xl transition-all duration-500 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}
-                    whileHover={{ scale: 1.02, y: -5 }}
-                    transition={{ duration: 0.3 }}
+                    className={`bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50 transition-all duration-500 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 + 0.3, ease: "easeInOut" }}
+                    viewport={{ once: true }}
                   >
                     {/* Icon and Title */}
                     <div className="flex items-center mb-6">
                       <motion.div
                         className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4 shadow-lg"
-                        whileHover={{ scale: 1.1, rotate: 360 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0, rotate: -90 }}
+                        whileInView={{ opacity: 1, rotate: 0 }}
+                        transition={{ duration: 0.6, delay: index * 0.2 + 0.5, ease: "easeInOut" }}
+                        viewport={{ once: true }}
                       >
                         <Image
                           src={item.icon}
@@ -140,7 +144,7 @@ export default function LoveStory() {
                       </div>
                     </div>
 
-                    {/* Description with enhanced styling */}
+                    {/* Description */}
                     <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6">
                       <p className="text-gray-700 leading-relaxed text-base md:text-lg">{item.description}</p>
                     </div>
@@ -151,19 +155,20 @@ export default function LoveStory() {
                   </motion.div>
                 </div>
 
-                {/* Enhanced Image Section */}
+                {/* Image Section */}
                 <div className="w-full md:w-5/12">
                   <motion.div
-                    className={`relative group ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}
-                    whileHover={{ scale: 1.03 }}
-                    transition={{ duration: 0.3 }}
+                    className={`relative ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.2 + 0.4, ease: "easeInOut" }}
+                    viewport={{ once: true }}
                   >
-                    {/* Simplified Image container for debugging */}
                     <div className="relative overflow-hidden rounded-3xl shadow-2xl h-64 md:h-80 lg:h-96">
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover transition-transform duration-700"
                         onLoad={() => console.log('Image loaded successfully:', item.image)}
                         onError={(e) => {
                           console.error('Image failed to load:', item.image);
@@ -184,16 +189,14 @@ export default function LoveStory() {
                       />
                       {/* Overlay gradient */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                      
-                     
                     </div>
 
-                    {/* Floating badge with timeline number */}
+                    {/* Timeline number badge */}
                     <motion.div
                       className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-lg shadow-xl"
-                      initial={{ scale: 0, rotate: -180 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      transition={{ duration: 0.6, delay: index * 0.2 + 0.5 }}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.6, delay: index * 0.2 + 0.7, ease: "easeInOut" }}
                       viewport={{ once: true }}
                     >
                       {index + 1}
@@ -204,19 +207,21 @@ export default function LoveStory() {
             ))}
           </div>
 
-          {/* Enhanced ending decoration */}
+          {/* Ending decoration */}
           <motion.div
             className="text-center mt-20 sm:mt-24"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50">
               <motion.div
                 className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.0, ease: "easeInOut" }}
+                viewport={{ once: true }}
               >
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" />

@@ -28,7 +28,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
         opacity: isOpen ? 0 : 1,
         pointerEvents: isOpen ? 'none' : 'auto',
       }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 1, ease: "easeInOut" }}
     >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/60 z-10" />
@@ -42,7 +42,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
           />
         </div>
         {/* Floating Particles */}
-        <FloatingParticles count={6} className="z-15" />
+        <FloatingParticles count={4} className="z-15" />
       </div>
 
       <div className="container-wedding relative z-20 flex flex-col items-center justify-center min-h-screen py-8">
@@ -51,7 +51,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             className="font-italiana text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
           >
             The Wedding Of
           </motion.h2>
@@ -60,7 +60,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             className="heading-1 text-white drop-shadow-2xl px-4"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
           >
             {coupleNames}
           </motion.h1>
@@ -69,7 +69,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             className="font-montserrat text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
           >
             16 Juni 2025
           </motion.h3>
@@ -78,12 +78,12 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             className="w-full max-w-md mx-auto mt-8 sm:mt-12 mb-6 sm:mb-8 px-4 perspective-1000"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.8, ease: "easeInOut" }}
           >
             <motion.div
               className="relative w-full h-[300px] sm:h-[320px]"
               animate={{ rotateY: showQR ? 180 : 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               style={{ 
                 transformStyle: 'preserve-3d',
                 perspective: '1000px'
@@ -156,7 +156,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             className="font-montserrat text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-white/90 leading-relaxed px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0 }}
+            transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}
           >
             Dengan penuh rasa syukur, kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara pernikahan kami yang penuh bahagia ini
           </motion.p>
@@ -164,12 +164,11 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1.2, ease: "easeInOut" }}
           >
             <motion.button
-              className="btn-primary rounded-full bg-secondary hover:bg-secondary/90 px-8 sm:px-10 py-3 sm:py-4 font-medium text-white flex items-center gap-3 mx-auto text-sm sm:text-base shadow-2xl"
+              className="btn-primary rounded-full bg-secondary text-white px-8 sm:px-10 py-3 sm:py-4 font-medium flex items-center gap-3 mx-auto text-sm sm:text-base shadow-2xl transition-all duration-300"
               onClick={onOpenInvitation}
-              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
