@@ -1,5 +1,5 @@
 /* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
@@ -61,7 +61,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Slab', serif;
   }
 
   h1, h2, h3 {
@@ -76,8 +76,12 @@
     font-family: 'Playfair Display', serif;
   }
 
+  .font-roboto-slab {
+    font-family: 'Roboto Slab', serif;
+  }
+
   .font-montserrat {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto Slab', serif;
   }
 
   .font-poppins {
@@ -91,7 +95,7 @@
   }
 
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 font-montserrat transition-all duration-300 ease-in-out;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 font-roboto-slab transition-all duration-300 ease-in-out;
   }
 
   .heading-1 {

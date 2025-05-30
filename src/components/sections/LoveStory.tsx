@@ -8,238 +8,264 @@ import FloatingParticles from '../ui/FloatingParticles';
 const timelineItems = [
   {
     id: 1,
+    type: 'text',
     title: weddingData.loveStory.meeting.title,
     date: weddingData.loveStory.meeting.date,
     description: weddingData.loveStory.meeting.description,
-    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbThibf49mxsjAhVcWMKYR2npEbzBU7fv89qG4',
-    icon: 'https://ext.same-assets.com/1904390701/1199203718.svg'
+    gridClass: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 2,
-    title: weddingData.loveStory.commitment.title,
-    date: weddingData.loveStory.commitment.date,
-    description: weddingData.loveStory.commitment.description,
-    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb1R0sC67wJ6qlUnQodXTDOF3CVNWcZxgpuGHY',
-    icon: 'https://ext.same-assets.com/1904390701/3273214577.svg'
+    type: 'image',
+    title: weddingData.loveStory.meeting.title,
+    image: '/IMG_0307.JPG',
+    gridClass: 'md:col-span-1 md:row-span-2'
   },
   {
     id: 3,
-    title: weddingData.loveStory.engagement.title,
-    date: weddingData.loveStory.engagement.date,
-    description: weddingData.loveStory.engagement.description,
-    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbTjPdo39mxsjAhVcWMKYR2npEbzBU7fv89qG4',
-    icon: 'https://ext.same-assets.com/1904390701/1873535483.svg'
+    type: 'text',
+    title: weddingData.loveStory.commitment.title,
+    date: weddingData.loveStory.commitment.date,
+    description: weddingData.loveStory.commitment.description,
+    gridClass: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 4,
-    title: 'Menikah',
-    date: 'Juni 2025',
-    description: `Akhirnya hari yang ditunggu-tunggu tiba! ${coupleNames} akan mengadakan pernikahan yang indah dan penuh berkah. Sebuah perjalanan cinta yang dimulai dari kantor di Osaka, Jepang, kini akan berlanjut ke jenjang yang lebih sakral.`,
-    image: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXerHo9ugDL7tpu5Zbrw18K2ojNhVncqIzeF6',
-    icon: 'https://ext.same-assets.com/1904390701/3280192825.svg'
+    type: 'image',
+    title: weddingData.loveStory.commitment.title,
+    image: '/IMG_0380.JPG',
+    gridClass: 'md:col-span-1 md:row-span-1'
+  },
+  {
+    id: 5,
+    type: 'image',
+    title: weddingData.loveStory.engagement.title,
+    image: '/IMG_0338.JPG',
+    gridClass: 'md:col-span-1 md:row-span-1'
+  },
+  {
+    id: 6,
+    type: 'text',
+    title: weddingData.loveStory.engagement.title,
+    date: weddingData.loveStory.engagement.date,
+    description: weddingData.loveStory.engagement.description,
+    gridClass: 'md:col-span-1 md:row-span-1'
   }
 ];
 
 export default function LoveStory() {
   return (
-    <section className="relative section-padding py-20 overflow-hidden">
+    <section className="relative bg-gray-900 py-20 md:py-32 overflow-hidden">
       {/* Floating Particles */}
       <FloatingParticles count={3} className="z-10" />
-      
-      {/* Decorative Background Elements */}
-      <div className="absolute top-32 left-8 w-64 h-64 border border-primary/10 rounded-full z-15"></div>
-      <div className="absolute bottom-40 right-12 w-48 h-48 border border-secondary/15 rounded-full z-15"></div>
-      <div className="absolute top-2/3 left-16 w-32 h-32 border border-primary/8 rounded-full z-15"></div>
       
       <div className="container-wedding relative z-20">
         {/* Header Section */}
         <motion.div
-          className="text-center mb-20 sm:mb-24"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
           viewport={{ once: true }}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <Image
-              src="https://ext.same-assets.com/1904390701/457500614.svg"
-              alt="Love Story"
-              width={100}
-              height={40}
-              className="mx-auto opacity-80"
-            />
-          </motion.div>
-          
           <motion.h2 
-            className="section-title mb-4"
+            className="font-playfair text-4xl md:text-5xl lg:text-6xl text-white font-medium mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             Kisah Cinta
           </motion.h2>
           
           <motion.h3 
-            className="font-playfair text-xl md:text-2xl lg:text-3xl text-secondary"
+            className="font-roboto-slab text-xl md:text-2xl text-gray-300"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeInOut" }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
             viewport={{ once: true }}
           >
             Kami Berdua
           </motion.h3>
         </motion.div>
 
-        <div className="relative max-w-6xl mx-auto">
-          {/* Timeline line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-primary via-secondary to-primary opacity-30 rounded-full hidden md:block"></div>
-
-          {/* Timeline items */}
-          <div className="relative z-10 space-y-20 md:space-y-32">
-            {timelineItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? '' : 'md:flex-row-reverse'}`}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2, ease: "easeInOut" }}
-                viewport={{ once: true, margin: "-100px" }}
-              >
-                {/* Content Card */}
-                <div className="w-full md:w-5/12 mb-8 md:mb-0">
-                  <motion.div
-                    className={`bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50 transition-all duration-500 ${index % 2 === 0 ? 'md:mr-8' : 'md:ml-8'}`}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.3, ease: "easeInOut" }}
-                    viewport={{ once: true }}
-                  >
-                    {/* Icon and Title */}
-                    <div className="flex items-center mb-6">
-                      <motion.div
-                        className="w-16 h-16 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center mr-4 shadow-lg"
-                        initial={{ opacity: 0, rotate: -90 }}
-                        whileInView={{ opacity: 1, rotate: 0 }}
-                        transition={{ duration: 0.6, delay: index * 0.2 + 0.5, ease: "easeInOut" }}
-                        viewport={{ once: true }}
-                      >
-                        <Image
-                          src={item.icon}
-                          alt={item.title}
-                          width={24}
-                          height={24}
-                          className="brightness-0 invert"
-                        />
-                      </motion.div>
-                      <div>
-                        <h3 className="font-playfair text-2xl md:text-3xl font-bold text-primary">{item.title}</h3>
-                        <div className="bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent font-semibold text-lg">{item.date}</div>
-                      </div>
-                    </div>
-
-                    {/* Description */}
-                    <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6">
-                      <p className="text-gray-700 leading-relaxed text-base md:text-lg">{item.description}</p>
-                    </div>
-
-                    {/* Decorative elements */}
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-tr-3xl"></div>
-                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-tr from-secondary/10 to-transparent rounded-bl-3xl"></div>
-                  </motion.div>
-                </div>
-
-                {/* Image Section */}
-                <div className="w-full md:w-5/12">
-                  <motion.div
-                    className={`relative ${index % 2 === 0 ? 'md:ml-8' : 'md:mr-8'}`}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.6, delay: index * 0.2 + 0.4, ease: "easeInOut" }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="relative overflow-hidden rounded-3xl shadow-2xl h-64 md:h-80 lg:h-96">
-                      <img
-                        src={item.image}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700"
-                        onLoad={() => console.log('Image loaded successfully:', item.image)}
-                        onError={(e) => {
-                          console.error('Image failed to load:', item.image);
-                          console.error('Error details:', e);
-                          // Try alternative UploadThing URLs
-                          const alternatives = [
-                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', // Gress-518.jpg
-                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', // IMG_0338.JPG
-                            'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S'  // IMG_0195.JPG
-                          ];
-                          const currentSrc = e.currentTarget.src;
-                          const nextAlt = alternatives.find(alt => !currentSrc.includes(alt));
-                          if (nextAlt) {
-                            console.log('Trying alternative:', nextAlt);
-                            e.currentTarget.src = nextAlt;
-                          }
-                        }}
-                      />
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                    </div>
-
-                    {/* Timeline number badge */}
-                    <motion.div
-                      className="absolute -top-4 -right-4 w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold text-lg shadow-xl"
-                      initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.6, delay: index * 0.2 + 0.7, ease: "easeInOut" }}
-                      viewport={{ once: true }}
-                    >
-                      {index + 1}
-                    </motion.div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Ending decoration */}
-          <motion.div
-            className="text-center mt-20 sm:mt-24"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
-            <div className="max-w-2xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/50">
-              <motion.div
-                className="w-16 h-16 mx-auto mb-6 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 1.0, ease: "easeInOut" }}
-                viewport={{ once: true }}
-              >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+        {/* Masonry Grid */}
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Pertemuan Text Card */}
+            <motion.div
+              className="bg-gray-700 rounded-2xl p-6 flex flex-col justify-start min-h-[280px] md:col-span-1"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white mr-3">
                   <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" />
                 </svg>
-              </motion.div>
-              <p className="font-playfair text-xl md:text-2xl text-primary italic leading-relaxed">
-                "Dan mereka hidup bahagia selamanya..."
+                <span className="font-roboto-slab text-sm text-gray-300">{weddingData.loveStory.meeting.date}</span>
+              </div>
+              <h3 className="font-playfair text-xl text-white font-medium mb-3">{weddingData.loveStory.meeting.title}</h3>
+              <p className="font-roboto-slab text-sm text-gray-300 leading-relaxed flex-1">
+                {weddingData.loveStory.meeting.description}
               </p>
-              <div className="flex items-center justify-center gap-4 mt-6 text-secondary">
-                <div className="w-12 h-[2px] bg-gradient-to-r from-transparent to-secondary"></div>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </motion.div>
+
+            {/* Large Image Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden min-h-[400px] md:min-h-[600px] md:col-span-1 lg:row-span-2"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src="/IMG_0307.JPG"
+                alt="Love Story Image"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
+            </motion.div>
+
+            {/* Hubungan Text Card */}
+            <motion.div
+              className="bg-gray-800 rounded-2xl p-6 flex flex-col justify-start min-h-[280px] md:col-span-1"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white mr-3">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" />
                 </svg>
-                <div className="w-12 h-[2px] bg-gradient-to-l from-transparent to-secondary"></div>
+                <span className="font-roboto-slab text-sm text-gray-300">{weddingData.loveStory.commitment.date}</span>
               </div>
-            </div>
-          </motion.div>
+              <h3 className="font-playfair text-xl text-white font-medium mb-3">{weddingData.loveStory.commitment.title}</h3>
+              <p className="font-roboto-slab text-sm text-gray-300 leading-relaxed flex-1">
+                {weddingData.loveStory.commitment.description}
+              </p>
+            </motion.div>
+
+            {/* Medium Image Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden min-h-[250px] md:col-span-1"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src="/IMG_0380.JPG"
+                alt="Love Story Image"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
+            </motion.div>
+
+            {/* Another Image Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden min-h-[250px] md:col-span-1"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.0 }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src="/IMG_0338.JPG"
+                alt="Love Story Image"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
+            </motion.div>
+
+            {/* Tunangan Text Card */}
+            <motion.div
+              className="bg-black rounded-2xl p-6 flex flex-col justify-start min-h-[280px] md:col-span-1"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white mr-3">
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="2" fill="none"/>
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" fill="none"/>
+                </svg>
+                <span className="font-roboto-slab text-sm text-gray-300">{weddingData.loveStory.engagement.date}</span>
+              </div>
+              <h3 className="font-playfair text-xl text-white font-medium mb-3">{weddingData.loveStory.engagement.title}</h3>
+              <p className="font-roboto-slab text-sm text-gray-300 leading-relaxed flex-1">
+                {weddingData.loveStory.engagement.description}
+              </p>
+            </motion.div>
+
+            {/* Final Image Card */}
+            <motion.div
+              className="relative rounded-2xl overflow-hidden min-h-[250px] md:col-span-1"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              viewport={{ once: true }}
+            >
+              <Image
+                src="/IMG_0195.JPG"
+                alt="Love Story Image"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
+            </motion.div>
+
+            {/* Menikah Text Card */}
+            <motion.div
+              className="bg-gradient-to-br from-gray-800 to-black rounded-2xl p-6 flex flex-col justify-start min-h-[280px] md:col-span-1"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center mb-4">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white mr-3">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor" />
+                </svg>
+                <span className="font-roboto-slab text-sm text-gray-300">Juni 2025</span>
+              </div>
+              <h3 className="font-playfair text-xl text-white font-medium mb-3">Menikah</h3>
+              <p className="font-roboto-slab text-sm text-gray-300 leading-relaxed flex-1">
+                Akhirnya hari yang ditunggu-tunggu tiba! {coupleNames} akan mengadakan pernikahan yang indah dan penuh berkah. Sebuah perjalanan cinta yang dimulai dari kantor di Osaka, Jepang, kini akan berlanjut ke jenjang yang lebih sakral. Dengan dukungan keluarga dan teman-teman, kami siap memulai babak baru dalam hidup sebagai suami istri.
+              </p>
+            </motion.div>
+
+          </div>
         </div>
+
+        {/* Bottom Quote */}
+        <motion.div
+          className="text-center mt-20"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.4 }}
+          viewport={{ once: true }}
+        >
+          <div className="max-w-2xl mx-auto">
+            <p className="font-playfair text-xl md:text-2xl text-white italic leading-relaxed">
+              "Dan mereka hidup bahagia selamanya..."
+            </p>
+            <div className="flex items-center justify-center gap-4 mt-6 text-gray-400">
+              <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-gray-400"></div>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor" />
+              </svg>
+              <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-gray-400"></div>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

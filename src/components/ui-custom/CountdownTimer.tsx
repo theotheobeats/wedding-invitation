@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 interface TimeLeft {
   days: number;
@@ -53,35 +54,38 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
     return num < 10 ? `0${num}` : `${num}`;
   };
 
+  const timeUnits = [
+    { value: timeLeft.days, label: 'HARI' },
+    { value: timeLeft.hours, label: 'JAM' },
+    { value: timeLeft.minutes, label: 'MENIT' },
+    { value: timeLeft.seconds, label: 'DETIK' }
+  ];
+
   return (
-    <div className="flex justify-center gap-4 md:gap-8 text-center">
-      <div className="flex flex-col items-center">
-        <div className="bg-primary/90 text-white w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center text-2xl md:text-4xl font-bold">
-          {formatNumber(timeLeft.days)}
-        </div>
-        <span className="text-sm mt-2 font-medium">Hari</span>
-      </div>
-
-      <div className="flex flex-col items-center">
-        <div className="bg-primary/90 text-white w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center text-2xl md:text-4xl font-bold">
-          {formatNumber(timeLeft.hours)}
-        </div>
-        <span className="text-sm mt-2 font-medium">Jam</span>
-      </div>
-
-      <div className="flex flex-col items-center">
-        <div className="bg-primary/90 text-white w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center text-2xl md:text-4xl font-bold">
-          {formatNumber(timeLeft.minutes)}
-        </div>
-        <span className="text-sm mt-2 font-medium">Menit</span>
-      </div>
-
-      <div className="flex flex-col items-center">
-        <div className="bg-primary/90 text-white w-16 h-16 md:w-24 md:h-24 rounded-lg flex items-center justify-center text-2xl md:text-4xl font-bold">
-          {formatNumber(timeLeft.seconds)}
-        </div>
-        <span className="text-sm mt-2 font-medium">Detik</span>
-      </div>
+    <div className="flex flex-col items-center justify-center space-y-6 md:space-y-8 h-screen">
+      {timeUnits.map((unit, index) => (
+        <motion.div
+          key={unit.label}
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 0.6, 
+            delay: index * 0.1,
+            ease: "easeInOut"
+          }}
+        >
+          {/* Number */}
+          <div className="text-2xl md:text-3xl lg:text-4xl font-roboto-slab font-light text-white leading-none mb-1">
+            {formatNumber(unit.value)}
+          </div>
+          
+          {/* Label */}
+          <div className="font-roboto-slab text-[8px] md:text-xs text-white/60 uppercase tracking-wider">
+            {unit.label}
+          </div>
+        </motion.div>
+      ))}
     </div>
   );
 }

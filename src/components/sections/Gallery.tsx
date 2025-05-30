@@ -28,7 +28,7 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <section className="relative section-padding py-20 bg-muted overflow-hidden">
+    <section className="relative bg-white py-20 md:py-32 overflow-hidden">
       {/* Floating Particles */}
       <FloatingParticles count={3} className="z-10" />
 

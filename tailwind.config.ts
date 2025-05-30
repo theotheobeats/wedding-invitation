@@ -9,6 +9,15 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'sans': ['Roboto Slab', 'serif'],
+        'serif': ['Roboto Slab', 'serif'],
+        'roboto-slab': ['Roboto Slab', 'serif'],
+        'playfair': ['Playfair Display', 'serif'],
+        'italiana': ['Italiana', 'serif'],
+        'montserrat': ['Roboto Slab', 'serif'], // Redirect to Roboto Slab
+        'poppins': ['Roboto Slab', 'serif'], // Redirect to Roboto Slab
+      },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

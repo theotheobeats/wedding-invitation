@@ -1,7 +1,5 @@
 import { AttendeeResponse } from './types';
 
-const API_BASE_URL = "https://j8wow48gsgwwg4soggskc0kc.theoprathama.com"
-
 /**
  * Fetch attendee data by code
  * @param code - Unique attendee code
@@ -9,7 +7,7 @@ const API_BASE_URL = "https://j8wow48gsgwwg4soggskc0kc.theoprathama.com"
  */
 export async function fetchAttendeeByCode(code: string): Promise<AttendeeResponse> {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/attendees/${code}`);
+    const response = await fetch(`https://j8wow48gsgwwg4soggskc0kc.theoprathama.com/api/attendees/${code}`);
     const data = await response.json();
     
     if (!response.ok) {

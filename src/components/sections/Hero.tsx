@@ -66,7 +66,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
           </motion.h1>
 
           <motion.h3 
-            className="font-montserrat text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
+            className="font-roboto-slab text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
@@ -101,7 +101,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
                 <h4 className="font-playfair text-lg sm:text-xl mb-4 text-white">Undangan Pernikahan</h4>
                 <div className="w-16 sm:w-20 h-[2px] bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-6"></div>
                 <h3 className="font-playfair text-xl sm:text-2xl mb-2 text-white">Kepada</h3>
-                <p className="font-montserrat text-lg sm:text-xl text-white/95 font-medium mb-6">{guestName}</p>
+                <p className="font-roboto-slab text-lg sm:text-xl text-white/95 font-medium mb-6">{guestName}</p>
                 {qrCode && (
                   <button
                     onClick={flipCard}
@@ -153,7 +153,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
           </motion.div>
 
           <motion.p 
-            className="font-montserrat text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-white/90 leading-relaxed px-4"
+            className="font-roboto-slab text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-white/90 leading-relaxed px-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}

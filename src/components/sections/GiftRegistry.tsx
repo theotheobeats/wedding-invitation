@@ -73,9 +73,9 @@ export default function GiftRegistry() {
                
                 <div className="text-center mb-6 sm:mb-8 space-y-3">
                   <h3 className="font-playfair text-xl sm:text-2xl md:text-3xl text-primary">{account.bankName}</h3>
-                  <h4 className="font-montserrat text-lg sm:text-xl text-gray-700">{account.name}</h4>
+                  <h4 className="font-roboto-slab text-lg sm:text-xl text-gray-700">{account.name}</h4>
                   <div className="bg-gray-50 p-4 rounded-xl">
-                    <p className="font-montserrat text-xl sm:text-2xl font-bold text-gray-800 tracking-wider">{account.accountNumber}</p>
+                    <p className="font-roboto-slab text-xl sm:text-2xl font-bold text-gray-800 tracking-wider">{account.accountNumber}</p>
                   </div>
                 </div>
 
