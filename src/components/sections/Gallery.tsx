@@ -1,10 +1,16 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Dialog, DialogContent } from '../ui/dialog';
 import FloatingParticles from '../ui/FloatingParticles';
+
+// Register GSAP plugins
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const galleryImages = [
   { id: 1, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S', alt: 'Eci & Sho Wedding Photo 1' },
@@ -26,32 +32,169 @@ const galleryImages = [
 
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const header = headerRef.current;
+    const grid = gridRef.current;
+
+    if (!section || !header || !grid) return;
+
+    // Set initial states
+    gsap.set(header.children, { y: 50, opacity: 0 });
+    gsap.set('.gallery-item', { y: 100, opacity: 0, scale: 0.8, rotationY: 15 });
+
+    // Header animation
+    const headerTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        end: 'top 50%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    headerTl
+      .to(header.children[0], { 
+        y: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: 'back.out(1.7)',
+        rotation: 360
+      })
+      .to(header.children[1], { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: 'power3.out'
+      }, '-=0.5')
+      .to(header.children[2], { 
+        y: 0, 
+        opacity: 1, 
+        duration: 0.8, 
+        ease: 'power3.out'
+      }, '-=0.6');
+
+    // Gallery items animation
+    const items = gsap.utils.toArray('.gallery-item');
+    
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: grid,
+        start: 'top 85%',
+        end: 'bottom 50%',
+        toggleActions: 'play none none reverse'
+      }
+    }).to(items, {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      rotationY: 0,
+      duration: 1.2,
+      ease: 'power3.out',
+      stagger: {
+        each: 0.1,
+        from: 'random'
+      }
+    });
+
+    // Magnetic hover effect for gallery items
+    items.forEach((item: any) => {
+      const image = item.querySelector('img');
+      const overlay = item.querySelector('.hover-overlay');
+      const icon = item.querySelector('.hover-icon');
+
+      item.addEventListener('mouseenter', () => {
+        gsap.to(item, {
+          scale: 1.05,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+        gsap.to(image, {
+          scale: 1.1,
+          duration: 0.6,
+          ease: 'power2.out'
+        });
+        gsap.to(overlay, {
+          opacity: 1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.fromTo(icon, {
+          scale: 0.5,
+          rotation: -180
+        }, {
+          scale: 1,
+          rotation: 0,
+          duration: 0.5,
+          ease: 'back.out(1.7)'
+        });
+      });
+
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, {
+          scale: 1,
+          duration: 0.4,
+          ease: 'power2.out'
+        });
+        gsap.to(image, {
+          scale: 1,
+          duration: 0.6,
+          ease: 'power2.out'
+        });
+        gsap.to(overlay, {
+          opacity: 0,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      // Magnetic effect
+      item.addEventListener('mousemove', (e: MouseEvent) => {
+        const rect = item.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        gsap.to(item, {
+          x: x * 0.1,
+          y: y * 0.1,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+      });
+
+      item.addEventListener('mouseleave', () => {
+        gsap.to(item, {
+          x: 0,
+          y: 0,
+          duration: 0.5,
+          ease: 'elastic.out(1, 0.3)'
+        });
+      });
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   return (
-    <section className="relative bg-white py-20 md:py-32 overflow-hidden">
+    <section ref={sectionRef} className="relative bg-white py-20 md:py-32 overflow-hidden">
       {/* Floating Particles */}
       <FloatingParticles count={3} className="z-10" />
 
-      {/* Simplified Decorative Background Elements */}
-      <div className="absolute top-20 right-8 w-96 h-96 border border-primary/8 rounded-full z-15"></div>
-      <div className="absolute bottom-32 left-12 w-64 h-64 border border-secondary/10 rounded-full z-15"></div>
+      {/* Animated decorative elements */}
+      <div className="absolute top-20 right-8 w-96 h-96 border border-primary/8 rounded-full z-15 animate-pulse"></div>
+      <div className="absolute bottom-32 left-12 w-64 h-64 border border-secondary/10 rounded-full z-15 animate-pulse delay-700"></div>
 
       <div className="container-wedding relative z-20">
         {/* Header Section */}
-        <motion.div 
-          className="text-center mb-20 sm:mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
-          viewport={{ once: true }}
-        >
-          <motion.div 
-            className="mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
+        <div ref={headerRef} className="text-center mb-20 sm:mb-24">
+          <div className="mb-8">
             <Image
               src="https://ext.same-assets.com/1904390701/1875536406.svg"
               alt="Gallery"
@@ -59,53 +202,32 @@ export default function Gallery() {
               height={40}
               className="mx-auto opacity-80"
             />
-          </motion.div>
+          </div>
 
-          <motion.h2 
-            className="section-title mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
+          <h2 className="font-playfair text-3xl md:text-4xl lg:text-5xl text-gray-800 font-medium mb-4">
             Mini Gallery
-          </motion.h2>
+          </h2>
 
-          <motion.p 
-            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-roboto-slab">
             Sebuah kumpulan momen indah dari perjalanan cinta Eci & Sho
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
         {/* Gallery Grid */}
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+          <div ref={gridRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
             {galleryImages.map((image, index) => (
-              <motion.div
+              <div
                 key={image.id}
-                className="relative aspect-square overflow-hidden rounded-2xl cursor-pointer transition-transform duration-300"
+                className="gallery-item relative aspect-square overflow-hidden rounded-2xl cursor-pointer"
                 onClick={() => setSelectedImage(image.src)}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
-                  ease: "easeInOut" 
-                }}
-                viewport={{ once: true }}
-                whileTap={{ scale: 0.98 }}
               >
                 <div className="relative w-full h-full bg-gradient-to-br from-primary/10 via-white to-secondary/10 p-[2px] rounded-2xl">
                   <div className="relative w-full h-full bg-white rounded-2xl overflow-hidden shadow-lg">
                     <img
                       src={image.src}
                       alt={image.alt}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-700"
                       style={{
                         objectPosition: 'center center'
                       }}
@@ -116,23 +238,23 @@ export default function Gallery() {
                       }}
                     />
 
-                    {/* Simple overlay */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300 hover:opacity-100"></div>
+                    {/* Hover overlay */}
+                    <div className="hover-overlay absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300"></div>
 
-                    {/* Simple view icon */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 hover:opacity-100">
+                    {/* Hover icon */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
                       <div className="text-center text-white">
-                        <div className="w-12 h-12 mx-auto mb-2 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                        <div className="hover-icon w-12 h-12 mx-auto mb-2 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 3h4a2 2 0 0 1 2 2v4m-6 0L21 3m-11 18h-4a2 2 0 0 1-2-2v-4m6 0L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </div>
-                        <p className="text-sm font-medium">View Photo</p>
+                        <p className="text-sm font-medium font-roboto-slab">View Photo</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

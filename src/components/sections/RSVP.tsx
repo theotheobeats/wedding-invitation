@@ -104,21 +104,21 @@ export default function RSVP() {
             viewport={{ once: true }}
           >
             <div className="relative">
-              <Image
-                src="https://ext.same-assets.com/1904390701/1788928505.svg"
-                alt="RSVP"
+            <Image
+              src="https://ext.same-assets.com/1904390701/1788928505.svg"
+              alt="RSVP"
                 width={50}
                 height={50}
                 className="mr-3 opacity-80"
-              />
-              <Image
-                src="https://ext.same-assets.com/1904390701/857206430.svg"
-                alt="RSVP"
+            />
+            <Image
+              src="https://ext.same-assets.com/1904390701/857206430.svg"
+              alt="RSVP"
                 width={50}
                 height={50}
                 className="opacity-80"
-              />
-            </div>
+            />
+          </div>
           </motion.div>
           
           <motion.h2 
@@ -167,122 +167,122 @@ export default function RSVP() {
                 <p className="text-gray-600">Mohon konfirmasi kehadiran Anda</p>
               </div>
 
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
                         <FormLabel className="text-lg font-semibold text-primary">Nama Lengkap</FormLabel>
-                        <FormControl>
+                      <FormControl>
                           <Input 
                             placeholder="Masukkan nama lengkap" 
                             {...field} 
                             className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary transition-colors"
                           />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="attendance"
-                    render={({ field }) => (
-                      <FormItem>
+                <FormField
+                  control={form.control}
+                  name="attendance"
+                  render={({ field }) => (
+                    <FormItem>
                         <FormLabel className="text-lg font-semibold text-primary">Konfirmasi Kehadiran</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
                             <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
                               <SelectValue placeholder="Pilih konfirmasi kehadiran" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
                             <SelectItem value="attending">✅ Hadir</SelectItem>
                             <SelectItem value="not-attending">❌ Tidak Hadir</SelectItem>
                             <SelectItem value="not-sure">🤔 Belum Pasti</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="guests"
-                    render={({ field }) => (
-                      <FormItem>
+                <FormField
+                  control={form.control}
+                  name="guests"
+                  render={({ field }) => (
+                    <FormItem>
                         <FormLabel className="text-lg font-semibold text-primary">Jumlah Tamu</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
                             <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
                               <SelectValue placeholder="Pilih jumlah tamu" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="1">1 orang</SelectItem>
-                            <SelectItem value="2">2 orang</SelectItem>
-                            <SelectItem value="3">3 orang</SelectItem>
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          <SelectItem value="1">1 orang</SelectItem>
+                          <SelectItem value="2">2 orang</SelectItem>
+                          <SelectItem value="3">3 orang</SelectItem>
                             <SelectItem value="4">4+ orang</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
                         <FormLabel className="text-lg font-semibold text-primary">Ucapan & Doa</FormLabel>
-                        <FormControl>
+                      <FormControl>
                           <textarea 
                             placeholder="Tulis ucapan dan doa terbaik untuk kami..."
                             {...field}
                             rows={4}
                             className="w-full rounded-xl border-2 border-gray-200 focus:border-primary transition-colors p-4 resize-none"
                           />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
                       <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 bg-gray-50 rounded-xl">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
                             className="mt-1"
-                          />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
                           <FormLabel className="text-sm">
                             Saya menyetujui bahwa ucapan saya akan ditampilkan di website ini
-                          </FormLabel>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
+                        </FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
 
                   <motion.div
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Button
-                      type="submit"
+                <Button
+                  type="submit"
                       className="w-full h-14 bg-gradient-to-r from-primary to-secondary text-white hover:shadow-xl transition-all duration-300 font-semibold text-lg rounded-xl"
-                      disabled={isSubmitted}
-                    >
+                  disabled={isSubmitted}
+                >
                       {isSubmitted ? (
                         <>
                           <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -299,10 +299,10 @@ export default function RSVP() {
                           Kirim Ucapan
                         </>
                       )}
-                    </Button>
+                </Button>
                   </motion.div>
-                </form>
-              </Form>
+              </form>
+            </Form>
             </div>
           </motion.div>
 
@@ -345,24 +345,24 @@ export default function RSVP() {
                     <div className="flex items-start mb-4">
                       <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-secondary flex items-center justify-center mr-4 shadow-lg">
                         <span className="text-white font-bold text-lg">{wish.name.charAt(0).toUpperCase()}</span>
-                      </div>
+                    </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold text-lg text-primary">{wish.name}</h4>
                           <div className="flex items-center bg-white rounded-full px-3 py-1 shadow-sm">
                             <div className={`w-2 h-2 rounded-full mr-2 ${wish.attendance === 'attending' ? 'bg-green-500' : 'bg-red-500'}`}></div>
                             <span className="text-xs font-medium">
-                              {wish.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
-                            </span>
-                          </div>
-                        </div>
+                          {wish.attendance === 'attending' ? 'Hadir' : 'Tidak Hadir'}
+                        </span>
                       </div>
                     </div>
+                  </div>
+                </div>
                     <p className="text-gray-700 mb-3 leading-relaxed">{wish.message}</p>
                     <span className="text-xs text-gray-500 font-medium">{wish.date}</span>
                   </motion.div>
-                ))}
-              </div>
+              ))}
+            </div>
 
               {/* Bible Quote Section */}
               <motion.div 
