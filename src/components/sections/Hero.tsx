@@ -14,172 +14,288 @@ interface HeroProps {
   qrCode?: string;
 }
 
+// Enhanced animation variants with aesthetic easing
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.46, 0.45, 0.94], // Custom cubic-bezier for smooth ease
+      staggerChildren: 0.15,
+      delayChildren: 0.3
+    }
+  }
+};
+
+const titleVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 60,
+    scale: 0.9
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 1.4,
+      ease: [0.16, 1, 0.3, 1], // Smooth ease-out curve
+      type: "spring",
+      stiffness: 100,
+      damping: 15
+    }
+  }
+};
+
+const subtitleVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 40,
+    filter: "blur(4px)"
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: 0.2
+    }
+  }
+};
+
+const buttonVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 30,
+    scale: 0.8
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 1,
+      ease: [0.34, 1.56, 0.64, 1], // Bouncy ease for button
+      delay: 0.4
+    }
+  },
+  hover: {
+    scale: 1.05,
+    y: -2,
+    transition: {
+      duration: 0.3,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }
+  },
+  tap: {
+    scale: 0.95,
+    transition: {
+      duration: 0.1,
+      ease: "easeInOut"
+    }
+  }
+};
+
+const guestVariants = {
+  hidden: { 
+    opacity: 0, 
+    y: 20,
+    scale: 0.9
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      delay: 0.6
+    }
+  }
+};
+
+const qrVariants = {
+  hidden: { 
+    opacity: 0, 
+    scale: 0.5,
+    rotate: -10
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.34, 1.56, 0.64, 1],
+      delay: 0.8
+    }
+  }
+};
+
 export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: HeroProps) {
   const [showQR, setShowQR] = useState(false);
 
-  const flipCard = () => {
-    setShowQR(!showQR);
-  };
-
   return (
-    <motion.div
-      className={`relative w-full min-h-screen flex flex-col items-center justify-center text-center p-4 overflow-hidden bg-[#2b211e] text-white`}
-      animate={{
-        opacity: isOpen ? 0 : 1,
-        pointerEvents: isOpen ? 'none' : 'auto',
-      }}
-      transition={{ duration: 1, ease: "easeInOut" }}
+    <motion.div 
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
     >
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/60 z-10" />
-        <div className="absolute inset-0">
-          <OptimizedImage
-            src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt"
-            alt="Wedding background"
-            fill
-            priority
-            className="object-cover"
-          />
-        </div>
-        {/* Floating Particles */}
-        <FloatingParticles count={4} className="z-15" />
-      </div>
+      {/* Enhanced Background with parallax effect */}
+      <motion.div 
+        className="absolute inset-0 z-0"
+        initial={{ scale: 1.1, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2, ease: "easeOut" }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10" />
+        <OptimizedImage
+          src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
+          alt="Wedding Background"
+          fill
+          className="object-cover object-center"
+          priority
+        />
+      </motion.div>
+
+      {/* Enhanced Floating Particles */}
+      <FloatingParticles count={6} className="z-15" />
+
+      {/* Decorative animated elements */}
+      <motion.div 
+        className="absolute top-20 left-8 w-32 h-32 border border-white/20 rounded-full z-15"
+        animate={{ 
+          rotate: 360,
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ 
+          rotate: { duration: 20, repeat: Infinity, ease: "linear" },
+          scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-8 w-24 h-24 border border-white/15 rounded-full z-15"
+        animate={{ 
+          rotate: -360,
+          scale: [1, 0.9, 1]
+        }}
+        transition={{ 
+          rotate: { duration: 15, repeat: Infinity, ease: "linear" },
+          scale: { duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }
+        }}
+      />
 
       <div className="container-wedding relative z-20 flex flex-col items-center justify-center min-h-screen py-8">
-        <div className="text-center space-y-4 sm:space-y-6 md:space-y-8">
+        <motion.div 
+          className="text-center space-y-4 sm:space-y-6 md:space-y-8"
+          variants={containerVariants}
+        >
           <motion.h2 
             className="font-italiana text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+            variants={subtitleVariants}
           >
             The Wedding Of
           </motion.h2>
 
           <motion.h1 
             className="heading-1 text-white drop-shadow-2xl px-4"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
+            variants={titleVariants}
           >
             {coupleNames}
           </motion.h1>
 
           <motion.h3 
             className="font-roboto-slab text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
+            variants={subtitleVariants}
           >
             16 Juni 2025
           </motion.h3>
 
-          <motion.div 
-            className="w-full max-w-md mx-auto mt-8 sm:mt-12 mb-6 sm:mb-8 px-4 perspective-1000"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8, ease: "easeInOut" }}
-          >
+          {/* Enhanced Guest Name Display */}
+          {guestName && guestName !== "Guest" && (
             <motion.div
-              className="relative w-full h-[300px] sm:h-[320px]"
-              animate={{ rotateY: showQR ? 180 : 0 }}
-              transition={{ duration: 0.6, ease: "easeInOut" }}
-              style={{ 
-                transformStyle: 'preserve-3d',
-                perspective: '1000px'
+              className="bg-white/10 backdrop-blur-md rounded-2xl px-6 py-4 border border-white/20"
+              variants={guestVariants}
+              whileHover={{ 
+                scale: 1.02,
+                backgroundColor: "rgba(255, 255, 255, 0.15)",
+                transition: { duration: 0.3 }
               }}
             >
-              {/* Front of card (Invitation) */}
-              <div 
-                className="absolute inset-0 w-full h-full bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 flex flex-col items-center justify-center"
-                style={{
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  transform: 'rotateY(0deg)'
-                }}
-              >
-                <h4 className="font-playfair text-lg sm:text-xl mb-4 text-white">Undangan Pernikahan</h4>
-                <div className="w-16 sm:w-20 h-[2px] bg-gradient-to-r from-transparent via-white/60 to-transparent mx-auto mb-6"></div>
-                <h3 className="font-playfair text-xl sm:text-2xl mb-2 text-white">Kepada</h3>
-                <p className="font-roboto-slab text-lg sm:text-xl text-white/95 font-medium mb-6">{guestName}</p>
-                {qrCode && (
-                  <button
-                    onClick={flipCard}
-                    className="text-sm text-white/80 hover:text-white flex items-center justify-center gap-2 mx-auto transition-colors duration-300 mt-auto"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 6h18"/>
-                      <path d="M7 12h10"/>
-                      <path d="M3 18h18"/>
-                    </svg>
-                    Show QR Code
-                  </button>
-                )}
-              </div>
+              <p className="text-white/80 text-sm font-roboto-slab mb-1">Kepada Yth:</p>
+              <p className="text-white font-playfair text-lg sm:text-xl font-medium">{guestName}</p>
+            </motion.div>
+          )}
 
-              {/* Back of card (QR Code) */}
-              {qrCode && (
-                <div 
-                  className="absolute inset-0 w-full h-full bg-white/10 backdrop-blur-sm rounded-2xl p-6 sm:p-8 border border-white/20 flex flex-col items-center justify-center"
-                  style={{
-                    backfaceVisibility: 'hidden',
-                    WebkitBackfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)'
-                  }}
+          {/* Enhanced QR Code Section */}
+          {qrCode && (
+            <motion.div
+              className="flex flex-col items-center space-y-4"
+              variants={guestVariants}
+            >
+              <motion.button
+                className="text-white/80 hover:text-white text-sm underline transition-colors duration-300"
+                onClick={() => setShowQR(!showQR)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {showQR ? 'Hide QR Code' : 'Show QR Code'}
+              </motion.button>
+              
+              {showQR && (
+                <motion.div
+                  className="bg-white p-4 rounded-2xl shadow-2xl"
+                  variants={qrVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                 >
-                  <h4 className="font-playfair text-lg sm:text-xl mb-6 text-white">Scan QR Code</h4>
-                  <div className="relative w-40 h-40 sm:w-48 sm:h-48 mx-auto mb-6 bg-white rounded-xl p-2">
-                    <Image
-                      src={qrCode}
-                      alt="Invitation QR Code"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                  <button
-                    onClick={flipCard}
-                    className="text-sm text-white/80 hover:text-white flex items-center justify-center gap-2 mx-auto transition-colors duration-300 mt-auto"
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="m12 19-7-7 7-7"/>
-                      <path d="M19 12H5"/>
-                    </svg>
-                    Back to Invitation
-                  </button>
-                </div>
+                  <img
+                    src={`data:image/png;base64,${qrCode}`}
+                    alt="Invitation QR Code"
+                    className="w-32 h-32 sm:w-40 sm:h-40"
+                  />
+                </motion.div>
               )}
             </motion.div>
-          </motion.div>
+          )}
 
-          <motion.p 
-            className="font-roboto-slab text-sm sm:text-base md:text-lg max-w-2xl mx-auto text-white/90 leading-relaxed px-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.0, ease: "easeInOut" }}
-          >
-            Dengan penuh rasa syukur, kami mengundang kehadiran Bapak/Ibu/Saudara/i pada acara pernikahan kami yang penuh bahagia ini
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: "easeInOut" }}
-          >
+          {/* Enhanced Open Invitation Button */}
+          <motion.div variants={buttonVariants}>
             <motion.button
-              className="btn-primary rounded-full bg-secondary text-white px-8 sm:px-10 py-3 sm:py-4 font-medium flex items-center gap-3 mx-auto text-sm sm:text-base shadow-2xl transition-all duration-300"
+              className="btn-primary rounded-full bg-gradient-to-r from-secondary to-primary text-white px-8 sm:px-12 py-4 sm:py-5 font-medium flex items-center gap-3 mx-auto text-sm sm:text-base shadow-2xl transition-all duration-300 border border-white/20"
               onClick={onOpenInvitation}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              variants={buttonVariants}
+              whileHover="hover"
+              whileTap="tap"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <motion.svg 
+                width="20" 
+                height="20" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+                animate={{ x: [0, 3, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              >
                 <path d="M13.4 12L8.7 7.3C8.5 7.1 8.5 6.9 8.5 6.7C8.5 6.5 8.6 6.3 8.7 6.1C8.9 5.9 9.1 5.8 9.3 5.8C9.5 5.8 9.7 5.9 9.9 6.1L15.1 11.3C15.3 11.5 15.4 11.7 15.4 12C15.4 12.3 15.3 12.5 15.1 12.7L9.9 17.9C9.7 18.1 9.5 18.2 9.3 18.2C9.1 18.2 8.9 18.1 8.7 17.9C8.5 17.7 8.5 17.5 8.5 17.3C8.5 17.1 8.6 16.9 8.7 16.7L13.4 12Z" fill="white" />
-              </svg>
-              Open Invitation
+              </motion.svg>
+              <span>Open Invitation</span>
             </motion.button>
           </motion.div>
-        </div>
+        </motion.div>
       </div>
+
+      {/* Subtle animated overlay */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/20 z-5"
+        animate={{ opacity: [0.5, 0.3, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
     </motion.div>
   );
 }
