@@ -83,14 +83,14 @@ export const weddingData: WeddingData = {
       time: "18.00",
       venue: "Airish Hotel PALEMBANG",
       address: "Airish Hotel PALEMBANG",
-      shareLocation: ""
+      shareLocation: "https://www.google.com/maps?sca_esv=584e7b64051bdf01&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiFmFpcmlzaCBob3RlbCBwYWxlbWJhbmcyERAuGIAEGMcBGJgFGJkFGK8BMgUQABiABDIFEAAYgAQyBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIgEC4YgAQYxwEYmAUYmQUYrwEYlwUY3AQY3gQY4ATYAQFIqhhQpQNY0hdwAXgBkAEAmAF5oAHLC6oBBDE5LjG4AQPIAQD4AQGYAhWgAqMMwgIKEAAYsAMY1gQYR8ICDRAAGLADGNYEGEcYyQPCAg4QABiABBiwAxiSAxiKBcICBRAhGKABwgIEECEYFcICBxAhGKABGArCAggQABiABBiiBMICBRAAGO8FwgIIEAAYogQYiQXCAgcQABiABBgKmAMAiAYBkAYKugYGCAEQARgUkgcEMTguM6AH2pwBsgcEMTcuM7gHmgzCBwcwLjExLjEwyAdD&um=1&ie=UTF-8&fb=1&gl=id&sa=X&geocode=KcP7fLVSdzsuMTjrevy081II&daddr=Jl.+Sukabangun+1+No.2233,+Suka+Bangun,+Kec.+Sukarami,+Kota+Palembang,+Sumatera+Selatan+30151"
     },
     blessing: {
       date: "16 Juni 2025",
       time: "10.00",
       venue: "GBI MPI PALEMBANG",
       address: "GBI MPI PALEMBANG",
-      shareLocation: ""
+      shareLocation: "https://g.co/kgs/Jg6f8Ye"
     }
   },
   digitalGift: {

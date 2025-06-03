@@ -5,24 +5,19 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Dialog, DialogContent } from '../ui/dialog';
 import FloatingParticles from '../ui/FloatingParticles';
+import { getGalleryImageUrls } from '@/lib/image-urls';
 
-const galleryImages = [
-  { id: 1, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S', alt: 'Eci & Sho Wedding Photo 1' },
-  { id: 2, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', alt: 'Eci & Sho Wedding Photo 2' },
-  { id: 3, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbPqTfVnaKYEQifNSdbP93UCpFHJz8qLxrV6kw', alt: 'Eci & Sho Wedding Photo 3' },
-  { id: 4, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', alt: 'Eci & Sho Wedding Photo 4' },
-  { id: 5, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb1R0sC67wJ6qlUnQodXTDOF3CVNWcZxgpuGHY', alt: 'Eci & Sho Wedding Photo 5' },
-  { id: 6, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbrPcgnueJMC1D4ZGeypxH9Et8vfPNuwAVXncB', alt: 'Eci & Sho Wedding Photo 6' },
-  { id: 7, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU', alt: 'Eci & Sho Wedding Photo 7' },
-  { id: 8, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbLVL5SS3Aw08W2p3ymD7SOME1tFndlXzCor4L', alt: 'Eci & Sho Wedding Photo 8' },
-  { id: 9, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb6SORMH1lLCHBIuoynfra1WU4bOcJNki3SeKY', alt: 'Eci & Sho Wedding Photo 9' },
-  { id: 10, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbfjDn622cDTkzlAW62qsMLYewuH5NCUx7mFXE', alt: 'Eci & Sho Wedding Photo 10' },
-  { id: 11, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbGshH14OCfFdA9jbwVolHW4nXs8pSuROYk06e', alt: 'Eci & Sho Wedding Photo 11' },
-  { id: 12, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbIQBtJjXaKL9NjAoB0Z6CYvwbuVFQWUXzxqIe', alt: 'Eci & Sho Wedding Photo 12' },
-  { id: 13, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbrPcgnueJMC1D4ZGeypxH9Et8vfPNuwAVXncB', alt: 'Eci & Sho Wedding Photo 13' },
-  { id: 14, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbTIXKZxR9mxsjAhVcWMKYR2npEbzBU7fv89qG', alt: 'Eci & Sho Wedding Photo 14' },
-  { id: 15, src: 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt', alt: 'Eci & Sho Wedding Photo 15' },
-];
+// Generate gallery images dynamically from available images
+const generateGalleryImages = () => {
+  const availableImages = getGalleryImageUrls();
+  return availableImages.map((src, index) => ({
+    id: index + 1,
+    src,
+    alt: `Gressy & Sho Wedding Photo ${index + 1}`
+  }));
+};
+
+const galleryImages = generateGalleryImages();
 
 // Animation variants
 const containerVariants = {
@@ -119,7 +114,7 @@ export default function Gallery() {
             className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-roboto-slab"
             variants={headerVariants}
           >
-            Sebuah kumpulan momen indah dari perjalanan cinta Eci & Sho
+            Sebuah kumpulan momen indah dari perjalanan cinta Gressy & Sho
           </motion.p>
         </motion.div>
 
@@ -158,7 +153,8 @@ export default function Gallery() {
                       transition={{ duration: 0.6, ease: "easeOut" }}
                       onError={(e) => {
                         console.error('Gallery image failed to load:', image.src);
-                        e.currentTarget.src = 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt';
+                        // Use first available image as fallback
+                        e.currentTarget.src = galleryImages[0]?.src || 'https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt';
                       }}
                     />
 
@@ -200,6 +196,18 @@ export default function Gallery() {
             ))}
           </motion.div>
         </div>
+
+        {/* Empty State */}
+        {galleryImages.length === 0 && (
+          <motion.div 
+            className="text-center py-20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <p className="text-gray-600 text-lg">No gallery images available at the moment.</p>
+          </motion.div>
+        )}
 
         {/* Dialog */}
         <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>

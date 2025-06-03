@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { coupleNames } from '@/lib/wedding-data';
@@ -154,7 +154,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10" />
         <OptimizedImage
-          src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
+          src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbNdyPJ0t1Ur0yBwME7gRxvoZcOf6jLq9XPhDt"
           alt="Wedding Background"
           fill
           className="object-cover object-center"
@@ -246,21 +246,32 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
                 {showQR ? 'Hide QR Code' : 'Show QR Code'}
               </motion.button>
               
-              {showQR && (
-                <motion.div
-                  className="bg-white p-4 rounded-2xl shadow-2xl"
-                  variants={qrVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                >
-                  <img
-                    src={`data:image/png;base64,${qrCode}`}
-                    alt="Invitation QR Code"
-                    className="w-32 h-32 sm:w-40 sm:h-40"
-                  />
-                </motion.div>
-              )}
+              <AnimatePresence mode="wait">
+                {showQR && (
+                  <motion.div
+                    className="bg-white p-4 rounded-2xl shadow-2xl"
+                    variants={qrVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    key="qr-code"
+                  >
+                    <img
+                      src={qrCode.startsWith('data:') ? qrCode : `data:image/png;base64,${qrCode}`}
+                      alt="Invitation QR Code"
+                      className="w-32 h-32 sm:w-40 sm:h-40 block"
+                      onError={(e) => {
+                        console.error('QR Code failed to load:', e);
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                      onLoad={() => {
+                        console.log('QR Code loaded successfully');
+                      }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           )}
 

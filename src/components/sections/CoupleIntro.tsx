@@ -358,7 +358,7 @@ export default function CoupleIntro() {
 
               {/* Enhanced Details */}
               <motion.div 
-                className="space-y-4 text-left"
+                className="space-y-4 text-right"
                 variants={detailsVariants}
               >
                 <motion.h4 

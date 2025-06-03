@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { weddingData } from '@/lib/wedding-data';
-import FloatingParticles from '../ui/FloatingParticles';
 
 // Animation variants
 const headerVariants = {
@@ -19,31 +18,16 @@ const headerVariants = {
   }
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.2
-    }
-  }
-};
-
 const cardVariants = {
   hidden: { 
-    y: 120, 
-    opacity: 0, 
-    scale: 0.8,
-    rotateX: 15 
+    y: 80, 
+    opacity: 0
   },
   visible: {
     y: 0,
     opacity: 1,
-    scale: 1,
-    rotateX: 0,
     transition: {
-      duration: 1.5,
+      duration: 0.8,
       ease: "easeOut"
     }
   }
@@ -81,172 +65,214 @@ export default function WeddingDetails() {
   }, []);
 
   return (
-    <section className="relative bg-gray-100 py-16 md:py-24 overflow-hidden">
-      {/* Floating Particles */}
-      <FloatingParticles count={3} className="z-10" />
-
+    <section className="relative bg-gray-50 py-16 md:py-24 overflow-hidden">
       <div className="container-wedding relative z-20">
-        {/* Header with decorative element */}
+        {/* Header */}
         <motion.div 
           className="text-center mb-12"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           variants={headerVariants}
         >
-          <div className="relative">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-4 w-16 h-8 bg-gray-100 rounded-b-full border-l-2 border-r-2 border-b-2 border-gray-300"></div>
-            <h2 className="font-roboto-slab text-lg text-gray-700 pt-8">
-              Acara akan dilaksanakan Pada
-            </h2>
-          </div>
+          <h2 className="font-roboto-slab text-xl text-gray-800 font-medium">
+            Acara akan dilaksanakan Pada :
+          </h2>
         </motion.div>
 
         {/* Event Cards */}
-        <motion.div 
-          className="grid md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-        >
-          {/* Blessing Event */}
+        <div className="max-w-md mx-auto space-y-8">
+          {/* Akad Nikah Card */}
           <motion.div 
-            className="event-card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200"
+            className="relative bg-white rounded-2xl shadow-lg overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={cardVariants}
-            whileHover={{ 
-              y: -15,
-              scale: 1.02,
-              transition: { duration: 0.6, ease: "easeOut" }
-            }}
           >
-            <div className="card-inner p-8 md:p-10">
-              {/* Date Section */}
-              <motion.div 
-                className="date-section text-center mb-8 p-6 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <div className="text-4xl md:text-5xl font-playfair text-primary font-bold mb-2">
-                  16
-                </div>
-                <div className="text-lg font-roboto-slab text-gray-700 uppercase tracking-wider">
-                  Juni 2025
-                </div>
-              </motion.div>
-
-              {/* Details Section */}
-              <div className="details-section text-center space-y-4">
-                <h3 className="font-playfair text-2xl md:text-3xl text-gray-800 font-medium">
-                  Pemberkatan Nikah
-                </h3>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-center text-gray-600">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-3">
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <polyline points="12,6 12,12 16,14" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                    <span className="font-roboto-slab">{weddingData.events.blessing.time} WIB</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-center text-gray-600">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-3">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
-                      <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                    <span className="font-roboto-slab">{weddingData.events.blessing.venue}</span>
-                  </div>
-                </div>
-
-                <motion.button 
-                  className="maps-button mt-6 px-6 py-3 bg-white/90 text-gray-700 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                  whileHover={{ 
-                    scale: 1.1,
-                    backgroundColor: '#ffffff',
-                    color: '#374151'
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => window.open(weddingData.events.blessing.shareLocation, '_blank')}
-                >
-                  Lihat Lokasi
-                </motion.button>
+            {/* Ribbon Bookmark */}
+            <div className="absolute top-0 right-6 z-20">
+              <div className="w-12 h-16 bg-white shadow-md relative">
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
               </div>
+            </div>
+
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <Image
+                src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
+                alt="Couple photo"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-black/70"></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10">
+              {/* Header Section */}
+              <div className="p-6 pb-0">
+                <h3 className="font-roboto-slab text-xl text-gray-800 font-medium">
+                  Akad Nikah
+                </h3>
+              </div>
+
+              {/* Date Section */}
+              <div className="flex items-start p-6 pt-4">
+                <div className="flex-shrink-0 mr-6">
+                  <div className="text-7xl font-bold text-gray-700 leading-none">
+                    16
+                  </div>
+                </div>
+                <div className="pt-4">
+                  <div className="text-lg text-gray-600 font-medium">
+                    Minggu
+                  </div>
+                  <div className="text-lg text-gray-600">
+                    Juni 2025
+                  </div>
+                </div>
+              </div>
+
+              {/* Details Section with Dark Overlay */}
+              <div className="bg-black/70 text-white p-6 space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-1">
+                    <div className="text-sm text-white/90 mb-1">Pukul</div>
+                    <div className="font-medium">{weddingData.events.blessing.time} WIB - selesai</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-start">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2 mt-1 flex-shrink-0">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                      <div>
+                        <div className="text-sm text-white/90 mb-1">Tempat</div>
+                        <div className="font-medium">{weddingData.events.blessing.venue}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+
+              {/* Google Maps Button */}
+              <motion.button 
+                className="w-full bg-gray-800 text-white py-4 flex items-center justify-center space-x-2 font-medium"
+                whileHover={{ backgroundColor: '#374151' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => window.open(weddingData.events.blessing.shareLocation, '_blank')}
+              >
+                <span>Google Maps</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.button>
             </div>
           </motion.div>
 
-          {/* Reception Event */}
+          {/* Resepsi Card */}
           <motion.div 
-            className="event-card bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200"
+            className="relative bg-white rounded-2xl shadow-lg overflow-hidden"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
             variants={cardVariants}
-            whileHover={{ 
-              y: -15,
-              scale: 1.02,
-              transition: { duration: 0.6, ease: "easeOut" }
-            }}
+            transition={{ delay: 0.2 }}
           >
-            <div className="card-inner p-8 md:p-10">
-              {/* Date Section */}
-              <motion.div 
-                className="date-section text-center mb-8 p-6 bg-gradient-to-r from-secondary/10 to-primary/10 rounded-2xl"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
-              >
-                <div className="text-4xl md:text-5xl font-playfair text-secondary font-bold mb-2">
-                  16
-                </div>
-                <div className="text-lg font-roboto-slab text-gray-700 uppercase tracking-wider">
-                  Juni 2025
-                </div>
-              </motion.div>
+            {/* Ribbon Bookmark */}
+            <div className="absolute top-0 right-6 z-20">
+              <div className="w-12 h-16 bg-white shadow-md relative">
+                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-6 border-r-6 border-t-8 border-l-transparent border-r-transparent border-t-white"></div>
+              </div>
+            </div>
 
-              {/* Details Section */}
-              <div className="details-section text-center space-y-4">
-                <h3 className="font-playfair text-2xl md:text-3xl text-gray-800 font-medium">
+            {/* Background Image */}
+            <div className="absolute inset-0">
+              <Image
+                src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
+                alt="Couple photo"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/70 to-black/70"></div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10">
+              {/* Header Section */}
+              <div className="p-6 pb-0">
+                <h3 className="font-roboto-slab text-xl text-gray-800 font-medium">
                   Resepsi
                 </h3>
-                
-                <div className="space-y-3">
-                  <div className="flex items-center justify-center text-gray-600">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-3">
-                      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                      <polyline points="12,6 12,12 16,14" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                    <span className="font-roboto-slab">{weddingData.events.reception.time} WIB</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-center text-gray-600">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-3">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
-                      <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
-                    </svg>
-                    <span className="font-roboto-slab">{weddingData.events.reception.venue}</span>
+              </div>
+
+              {/* Date Section */}
+              <div className="flex items-start p-6 pt-4">
+                <div className="flex-shrink-0 mr-6">
+                  <div className="text-7xl font-bold text-gray-700 leading-none">
+                    16
                   </div>
                 </div>
-
-                <motion.button 
-                  className="maps-button mt-6 px-6 py-3 bg-white/90 text-gray-700 rounded-full font-medium transition-all duration-300 shadow-md hover:shadow-lg"
-                  whileHover={{ 
-                    scale: 1.1,
-                    backgroundColor: '#ffffff',
-                    color: '#374151'
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => window.open(weddingData.events.reception.shareLocation, '_blank')}
-                >
-                  Lihat Lokasi
-                </motion.button>
+                <div className="pt-4">
+                  <div className="text-lg text-gray-600 font-medium">
+                    Minggu
+                  </div>
+                  <div className="text-lg text-gray-600">
+                    Juni 2025
+                  </div>
+                </div>
               </div>
+
+              {/* Details Section with Dark Overlay */}
+              <div className="bg-black/70 text-white p-6 space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="flex-1">
+                    <div className="text-sm text-white/90 mb-1">Pukul</div>
+                    <div className="font-medium">{weddingData.events.reception.time} WIB - selesai</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-start">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2 mt-1 flex-shrink-0">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
+                        <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+                      </svg>
+                      <div>
+                        <div className="text-sm text-white/90 mb-1">Kediaman</div>
+                        <div className="font-medium">mempelai wanita</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-sm text-white/90 leading-relaxed">
+                  {weddingData.events.reception.venue}
+                </div>
+              </div>
+
+              {/* Google Maps Button */}
+              <motion.button 
+                className="w-full bg-gray-800 text-white py-4 flex items-center justify-center space-x-2 font-medium"
+                whileHover={{ backgroundColor: '#374151' }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => window.open(weddingData.events.reception.shareLocation, '_blank')}
+              >
+                <span>Google Maps</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </motion.button>
             </div>
           </motion.div>
-        </motion.div>
+        </div>
 
         {/* Countdown Timer */}
         <motion.div 
-          className="text-center"
+          className="text-center mt-16"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
         >
           <h3 className="font-playfair text-2xl md:text-3xl text-gray-800 font-medium mb-8">
