@@ -242,30 +242,6 @@ export default function RSVP() {
 
                   <FormField
                     control={form.control}
-                    name="guests"
-                    render={({ field }) => (
-                      <FormItem>
-                          <FormLabel className="text-lg font-semibold text-primary">Jumlah Tamu</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                              <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
-                                <SelectValue placeholder="Pilih jumlah tamu" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                            <SelectItem value="1">1 orang</SelectItem>
-                            <SelectItem value="2">2 orang</SelectItem>
-                            <SelectItem value="3">3 orang</SelectItem>
-                              <SelectItem value="4">4+ orang</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
                     name="message"
                     render={({ field }) => (
                       <FormItem>
