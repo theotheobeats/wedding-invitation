@@ -76,7 +76,7 @@ export default function WeddingDetails() {
           variants={headerVariants}
         >
           <h2 className="font-roboto-slab text-xl text-gray-800 font-medium">
-            Acara akan dilaksanakan Pada :
+            Acara akan dilaksanakan Pada:
           </h2>
         </motion.div>
 
@@ -113,7 +113,7 @@ export default function WeddingDetails() {
               {/* Header Section */}
               <div className="p-6 pb-0">
                 <h3 className="font-roboto-slab text-xl text-gray-800 font-medium">
-                  Akad Nikah
+                  Pemberkatan Pernikahan
                 </h3>
               </div>
 
@@ -126,7 +126,7 @@ export default function WeddingDetails() {
                 </div>
                 <div className="pt-4">
                   <div className="text-lg text-gray-600 font-medium">
-                    Minggu
+                    Senin
                   </div>
                   <div className="text-lg text-gray-600">
                     Juni 2025
@@ -217,7 +217,7 @@ export default function WeddingDetails() {
                 </div>
                 <div className="pt-4">
                   <div className="text-lg text-gray-600 font-medium">
-                    Minggu
+                    Senin
                   </div>
                   <div className="text-lg text-gray-600">
                     Juni 2025
@@ -239,15 +239,11 @@ export default function WeddingDetails() {
                         <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                       </svg>
                       <div>
-                        <div className="text-sm text-white/90 mb-1">Kediaman</div>
-                        <div className="font-medium">mempelai wanita</div>
+                        <div className="text-sm text-white/90 mb-1">Tempat</div>
+                        <div className="font-medium">{weddingData.events.reception.venue}</div>
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="text-sm text-white/90 leading-relaxed">
-                  {weddingData.events.reception.venue}
                 </div>
               </div>
 
