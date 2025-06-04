@@ -34,9 +34,6 @@ const formSchema = z.object({
   attendance: z.enum(['PRESENT', 'NOT_PRESENT', 'MAYBE'], {
     required_error: "Please select an attendance option.",
   }),
-  guests: z.string({
-    required_error: "Please select number of guests.",
-  }),
   message: z.string().min(2, {
     message: "Message must be at least 2 characters.",
   }),
@@ -79,12 +76,18 @@ export default function RSVP() {
       setIsLoading(true);
       setError(null);
 
+      // Log the values being submitted
+      console.log('Submitting values:', values);
+
       const comment = await submitComment({
         content: values.message,
         author: values.name,
         isPresent: values.attendance,
         authorId: Math.random().toString(36).substring(7), // Generate a random ID for demo purposes
       });
+
+      // Log the response from the server
+      console.log('Server response:', comment);
 
       setComments(prevComments => [comment, ...prevComments]);
       setIsSubmitted(true);
@@ -95,7 +98,11 @@ export default function RSVP() {
       }, 3000);
     } catch (err) {
       console.error('Failed to submit comment:', err);
-      setError('Failed to submit your message. Please try again.');
+      if (err instanceof Error) {
+        setError(err.message || 'Failed to submit your message. Please try again.');
+      } else {
+        setError('Failed to submit your message. Please try again.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -289,29 +296,29 @@ export default function RSVP() {
                       className="w-full h-14 bg-gradient-to-r from-primary to-secondary text-white hover:shadow-xl transition-all duration-300 font-semibold text-lg rounded-xl"
                       disabled={isSubmitted || isLoading}
                     >
-                        {isLoading ? (
-                          <>
-                            <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            Mengirim...
-                          </>
-                        ) : isSubmitted ? (
-                          <>
-                            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                            Terkirim!
-                          </>
-                        ) : (
-                          <>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
-                              <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
-                            Kirim Ucapan
-                          </>
-                        )}
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Mengirim...
+                        </>
+                      ) : isSubmitted ? (
+                        <>
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                          Terkirim!
+                        </>
+                      ) : (
+                        <>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+                            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          Kirim Ucapan
+                        </>
+                      )}
                     </Button>
                     </motion.div>
                 </form>
