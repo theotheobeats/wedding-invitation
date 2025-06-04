@@ -14,7 +14,7 @@ export default function SaveTheDate() {
             <div>
               {/* Title and Quote Section */}
               <div className="mt-16 md:mt-24 p-8">
-                <motion.h1 
+                <motion.h1
                   className="font-playfair text-4xl md:text-5xl lg:text-6xl tracking-wide text-white"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export default function SaveTheDate() {
                   <span className="inline-block">Hari</span>
                 </motion.h1>
 
-                <motion.div 
+                <motion.div
                   className="mt-8 md:mt-12 max-w-md"
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -43,8 +43,8 @@ export default function SaveTheDate() {
               </div>
 
               {/* Couple Photo */}
-              <motion.div 
-                className="relative w-1/2 md:w-1/3 h-48 md:h-64 mt-8 ml-8"
+              <motion.div
+                className="relative w-1/2 md:w-1/3 h-48 md:h-64 mt-8 ml-8" 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -66,13 +66,13 @@ export default function SaveTheDate() {
             
             <div>
               {/* Countdown Sidebar */}
-              <motion.div 
+              <motion.div
                 className="w-20 md:w-24 flex flex-row md:flex-col justify-between items-center bg-zinc-900 px-2 md:py-8"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
                 viewport={{ once: true }}
-              >
+                >
                 <div>
                   <CountdownTimer targetDate={weddingDate} />
                 </div>
@@ -82,7 +82,7 @@ export default function SaveTheDate() {
         </div>
 
         {/* Background Image */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 z-0 opacity-25"
           initial={{ scale: 1.1, opacity: 0 }}
           animate={{ scale: 1, opacity: 0.25 }}
@@ -95,7 +95,7 @@ export default function SaveTheDate() {
             className="object-cover object-center"
           />
         </motion.div>
-        
+
         {/* Animated decorative elements */}
         <motion.div 
           className="absolute top-20 right-8 w-16 h-16 border border-white/10 rounded-full z-15"
