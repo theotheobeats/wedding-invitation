@@ -189,7 +189,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
         }}
       />
 
-      <div className="container-wedding relative z-20 flex flex-col items-center min-h-screen pt-20">
+      <div className="container-wedding relative z-20 flex flex-col items-center min-h-screen pt-12">
         <motion.div
           className="text-center space-y-4 sm:space-y-6 md:space-y-8"
           variants={containerVariants}
@@ -232,57 +232,58 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
               </motion.div>
             )}
 
-            {/* Enhanced QR Code Section */}
-            {qrCode && (
-              <motion.div
-                className="flex flex-col items-center space-y-4"
-                variants={guestVariants}
-              >
-                <motion.button
-                  className="text-white/80 hover:text-white text-sm underline transition-colors duration-300"
-                  onClick={() => setShowQR(!showQR)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {showQR ? 'Hide QR Code' : 'Show QR Code'}
-                </motion.button>
 
-                <AnimatePresence mode="wait">
-                  {showQR && (
-                    <motion.div
-                      className="bg-white p-4 rounded-2xl shadow-2xl"
-                      variants={qrVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
-                      key="qr-code"
-                    >
-                      <img
-                        src={qrCode.startsWith('data:') ? qrCode : `data:image/png;base64,${qrCode}`}
-                        alt="Invitation QR Code"
-                        className="w-32 h-32 sm:w-40 sm:h-40 block"
-                        onError={(e) => {
-                          console.error('QR Code failed to load:', e);
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                        }}
-                        onLoad={() => {
-                          console.log('QR Code loaded successfully');
-                        }}
-                      />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            )}
           </div>
         </motion.div>
 
         {/* Enhanced Open Invitation Button */}
-        <motion.div 
+        <motion.div
           variants={buttonVariants}
           className="mt-auto mb-20"
         >
+          {/* Enhanced QR Code Section */}
+          {qrCode && (
+            <motion.div
+              className="flex flex-col items-center space-y-4 mb-16"
+              variants={guestVariants}
+            >
+              <motion.button
+                className="text-white/80 hover:text-white text-sm underline transition-colors duration-300"
+                onClick={() => setShowQR(!showQR)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {showQR ? 'Hide QR Code' : 'Show QR Code'}
+              </motion.button>
+
+              <AnimatePresence mode="wait">
+                {showQR && (
+                  <motion.div
+                    className="bg-white p-4 rounded-2xl shadow-2xl"
+                    variants={qrVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    key="qr-code"
+                  >
+                    <img
+                      src={qrCode.startsWith('data:') ? qrCode : `data:image/png;base64,${qrCode}`}
+                      alt="Invitation QR Code"
+                      className="w-32 h-32 sm:w-40 sm:h-40 block"
+                      onError={(e) => {
+                        console.error('QR Code failed to load:', e);
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                      onLoad={() => {
+                        console.log('QR Code loaded successfully');
+                      }}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          )}
           <motion.button
             className="btn-primary rounded-full bg-gradient-to-r from-secondary to-primary text-white px-8 sm:px-12 py-4 sm:py-5 font-medium flex items-center gap-3 mx-auto text-sm sm:text-base shadow-2xl transition-all duration-300 border border-white/20"
             onClick={onOpenInvitation}
@@ -290,11 +291,11 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             whileHover="hover"
             whileTap="tap"
           >
-            <motion.svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
+            <motion.svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
               xmlns="http://www.w3.org/2000/svg"
               animate={{ x: [0, 3, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}

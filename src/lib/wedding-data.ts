@@ -102,7 +102,7 @@ export const weddingData: WeddingData = {
     meeting: {
       title: "Pertemuan",
       date: "2022",
-      description: "Office romance? Why not! Pertemuan pertama kami di Tahun 2022 saat Sho ditunjuk sebagai pembimbing untuk Gressy yang saat itu baru mulai bekerja di Osaka, Jepang."
+      description: "Pertemuan pertama kami di Tahun 2022 saat Sho ditunjuk sebagai pembimbing untuk Gressy yang saat itu baru mulai bekerja di Osaka, Jepang."
     },
     commitment: {
       title: "Berkomitmen",
@@ -112,7 +112,7 @@ export const weddingData: WeddingData = {
     engagement: {
       title: "Lamaran",
       date: "2025",
-      description: "Sudah 2 tahun lebih sejak kami mulai berkomitmen, namun kontrak kerja Gressy yang tidak memungkinkan untuk pulang ke Indonesia dalam kurun waktu kurang dari 3 tahun, membuat acara lamaran dan pernikahan kami harus dilakukan dalam minggu yang sama. And here we are! We did it!"
+      description: "Sudah 2 tahun lebih sejak kami mulai berkomitmen, namun kontrak kerja Gressy yang tidak memungkinkan untuk pulang ke Indonesia dalam kurun waktu kurang dari 3 tahun, membuat acara lamaran dan pernikahan kami harus dilakukan dalam minggu yang sama."
     }
   }
 };

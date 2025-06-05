@@ -40,7 +40,7 @@ const timelineItems = [
     id: 5,
     type: 'image',
     title: weddingData.loveStory.engagement.title,
-    image: '/IMG_0338.JPG',
+    image: '/7c80a5ff-a909-4c6b-b99d-61c09ccdb2a0.jpg',
     gridClass: 'md:col-span-1 md:row-span-1'
   },
   {
@@ -156,13 +156,6 @@ export default function LoveStory() {
           >
             Our Love Story
           </motion.h2>
-
-          <motion.p 
-            className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto font-roboto-slab"
-            variants={headerVariants}
-          >
-            Perjalanan cinta {weddingData.bride.nickname} & {weddingData.groom.nickname} yang dimulai dari pertemuan sederhana
-          </motion.p>
         </motion.div>
 
         {/* Timeline Grid */}

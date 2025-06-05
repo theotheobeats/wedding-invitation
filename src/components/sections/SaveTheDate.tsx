@@ -44,7 +44,7 @@ export default function SaveTheDate() {
 
               {/* Couple Photo */}
               <motion.div
-                className="relative w-1/2 md:w-1/3 h-48 md:h-64 mt-8 ml-8" 
+                className="relative w-1/2 md:w-1/3 h-48 md:h-64 mt-28 ml-8 z-20" 
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
@@ -53,7 +53,7 @@ export default function SaveTheDate() {
               >
                 <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl">
                   <Image
-                    src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
+                    src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb81liXsxMqlXk5KLSTw0ZaeyhzjRcCbFJNsf2"
                     alt="Couple photo"
                     fill
                     className="object-cover"

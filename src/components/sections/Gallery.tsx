@@ -109,13 +109,6 @@ export default function Gallery() {
           >
             Mini Gallery
           </motion.h2>
-
-          <motion.p 
-            className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-roboto-slab"
-            variants={headerVariants}
-          >
-            Sebuah kumpulan momen indah dari perjalanan cinta Gressy & Sho
-          </motion.p>
         </motion.div>
 
         {/* Gallery Grid */}

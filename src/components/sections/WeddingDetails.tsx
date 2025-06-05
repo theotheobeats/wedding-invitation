@@ -75,9 +75,6 @@ export default function WeddingDetails() {
           viewport={{ once: true }}
           variants={headerVariants}
         >
-          <h2 className="font-roboto-slab text-xl text-gray-800 font-medium">
-            Acara akan dilaksanakan Pada:
-          </h2>
         </motion.div>
 
         {/* Event Cards */}
@@ -191,7 +188,7 @@ export default function WeddingDetails() {
             {/* Background Image */}
             <div className="absolute inset-0">
               <Image
-                src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
+                src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU"
                 alt="Couple photo"
                 fill
                 className="object-cover"
@@ -262,50 +259,6 @@ export default function WeddingDetails() {
             </div>
           </motion.div>
         </div>
-
-        {/* Countdown Timer */}
-        <motion.div 
-          className="text-center mt-16"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.5 }}
-        >
-          <h3 className="font-playfair text-2xl md:text-3xl text-gray-800 font-medium mb-8">
-            Menuju Hari Bahagia
-          </h3>
-          
-          <div className="grid grid-cols-4 gap-4 md:gap-8 max-w-md mx-auto">
-            {[
-              { label: 'Hari', value: timeLeft.days },
-              { label: 'Jam', value: timeLeft.hours },
-              { label: 'Menit', value: timeLeft.minutes },
-              { label: 'Detik', value: timeLeft.seconds }
-            ].map((item, index) => (
-              <motion.div
-                key={item.label}
-                className="text-center"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: 0.7 + index * 0.1,
-                  ease: "backOut"
-                }}
-              >
-                <div className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200">
-                  <div className="text-2xl md:text-3xl font-playfair font-bold text-primary mb-1">
-                    {item.value.toString().padStart(2, '0')}
-                  </div>
-                  <div className="text-xs md:text-sm font-roboto-slab text-gray-600 uppercase tracking-wider">
-                    {item.label}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
