@@ -34,7 +34,7 @@ const getFormSchema = (translate: (key: string) => string) => z.object({
 export default function RSVP() {
   const { translate, language } = useLanguage(); // useLanguage hook
 
-  const formSchema = useMemo(() => getFormSchema(translate), [translate, language]); // memoize schema
+  const formSchema = useMemo(() => getFormSchema(translate), [translate]); // memoize schema
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

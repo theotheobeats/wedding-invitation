@@ -4,6 +4,10 @@ import React, { createContext, useState, useContext, ReactNode } from 'react';
 
 export type Language = 'id' | 'en' | 'ja';
 
+// Define recursive type for nested translation objects
+export type TranslationTree = { [key: string]: string | TranslationTree };
+export type Translations = { [key in Language]?: TranslationTree };
+
 interface LanguageContextType {
   language: Language;
   setLanguage: (language: Language) => void;
@@ -12,45 +16,50 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children, translations }: { children: ReactNode, translations: any }) => {
+export const LanguageProvider = ({
+  children,
+  translations,
+}: {
+  children: ReactNode;
+  translations: Translations;
+}) => {
   const [language, setLanguage] = useState<Language>('en'); // Default to English
 
   const translate = (key: string, section?: string): string => {
     const path = section ? `${section}.${key}` : key;
     const keys = path.split('.');
-    let current = translations[language];
-    try {
+
+    const findTranslation = (lang: Language): string | undefined => {
+      let current: string | TranslationTree | undefined = translations[lang];
       for (const k of keys) {
-        current = current[k];
-        if (current === undefined) {
-          // Fallback to English if translation is missing
-          current = translations['en'];
-          for (const k_fb of keys) {
-            current = current[k_fb];
-            if (current === undefined) {
-              return path; // Return key path if still not found
-            }
-          }
-          return current || path;
+        if (typeof current === 'object' && current !== null) {
+          current = current[k];
+        } else {
+          return undefined;
         }
       }
-      return current || path;
-    } catch (error) {
-      console.warn(`Translation not found for key: ${path} in language: ${language}. Falling back to English.`);
-      // Try to find in English
-      current = translations['en'];
-      try {
-        for (const k_fb of keys) {
-          current = current[k_fb];
-          if (current === undefined) {
-            return path; // Return key path if still not found
-          }
-        }
-        return current || path;
-      } catch (e) {
-        return path; // Return the key itself if not found
+      if (typeof current === 'string') {
+        return current;
+      }
+      return undefined;
+    };
+
+    let translation = findTranslation(language);
+
+    // If translation not found or is not a string, fallback to English
+    if (translation === undefined) {
+      if (language !== 'en') {
+        translation = findTranslation('en');
       }
     }
+
+    if (translation !== undefined) {
+      return translation;
+    }
+
+    // If still not found, return the key path as a fallback
+    console.warn(`Translation not found for key: ${path}`);
+    return path;
   };
 
   return (
