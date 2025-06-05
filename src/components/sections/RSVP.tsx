@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "../ui/button";
@@ -13,47 +13,66 @@ import { Input } from "../ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import FloatingParticles from '../ui/FloatingParticles';
 import { fetchComments, submitComment, Comment } from "@/lib/api";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-
-// Helper function to format date
-function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return date.toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-const formSchema = z.object({
+// formSchema is now a function that takes translate
+const getFormSchema = (translate: (key: string) => string) => z.object({
   name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: translate("rsvpSection.validation.nameMin"),
   }),
   attendance: z.enum(['PRESENT', 'NOT_PRESENT', 'MAYBE'], {
-    required_error: "Please select an attendance option.",
+    required_error: translate("rsvpSection.validation.attendanceRequired"),
   }),
   message: z.string().min(2, {
-    message: "Message must be at least 2 characters.",
+    message: translate("rsvpSection.validation.messageMin"),
   }),
   terms: z.boolean().refine(val => val === true, {
-    message: "You must accept the terms.",
+    message: translate("rsvpSection.validation.termsRequired"),
   }),
 });
 
 export default function RSVP() {
+  const { translate, language } = useLanguage(); // useLanguage hook
+
+  const formSchema = useMemo(() => getFormSchema(translate), [translate, language]); // memoize schema
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
 
-  const form = useForm<z.infer<typeof formSchema>>({
+  // formatDate moved inside the component to access language context
+  const formatDate = (dateString: string): string => {
+    const date = new Date(dateString);
+    let locale;
+    switch (language) {
+      case 'id':
+        locale = 'id-ID';
+        break;
+      case 'ja':
+        locale = 'ja-JP';
+        break;
+      case 'en':
+      default:
+        locale = 'en-US'; // Default to English (US)
+        break;
+    }
+    return date.toLocaleDateString(locale, {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  };
+
+  const form = useForm<z.infer<ReturnType<typeof getFormSchema>>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       message: "",
       terms: false,
+      // attendance will be undefined by default, placeholder will show
     },
   });
 
@@ -64,47 +83,49 @@ export default function RSVP() {
         setComments(fetchedComments);
       } catch (err) {
         console.error('Failed to load comments:', err);
-        setError('Failed to load comments. Please try again later.');
+        setError(translate('rsvpSection.errorLoadComments')); // Translated error
       }
     };
-
     loadComments();
-  }, []);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [translate]); // Added translate to dependencies as it's used in setError
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<ReturnType<typeof getFormSchema>>) {
     try {
       setIsLoading(true);
       setError(null);
-
-      // Log the values being submitted
       console.log('Submitting values:', values);
-
       const comment = await submitComment({
         content: values.message,
         author: values.name,
         isPresent: values.attendance,
-        authorId: Math.random().toString(36).substring(7), // Generate a random ID for demo purposes
+        authorId: Math.random().toString(36).substring(7),
       });
-
-      // Log the response from the server
       console.log('Server response:', comment);
-
       setComments(prevComments => [comment, ...prevComments]);
       setIsSubmitted(true);
       form.reset();
-
       setTimeout(() => {
         setIsSubmitted(false);
       }, 3000);
     } catch (err) {
       console.error('Failed to submit comment:', err);
       if (err instanceof Error) {
-        setError(err.message || 'Failed to submit your message. Please try again.');
+        setError(err.message || translate('rsvpSection.errorSubmit')); // Translated error
       } else {
-        setError('Failed to submit your message. Please try again.');
+        setError(translate('rsvpSection.errorSubmit')); // Translated error
       }
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  const getAttendanceDisplay = (isPresentStatus: 'PRESENT' | 'NOT_PRESENT' | 'MAYBE') => {
+    switch (isPresentStatus) {
+      case 'PRESENT': return translate('guestBookSection.attendancePresent');
+      case 'NOT_PRESENT': return translate('guestBookSection.attendanceNotPresent');
+      case 'MAYBE': return translate('guestBookSection.attendanceMaybe');
+      default: return "";
     }
   }
 
@@ -137,14 +158,14 @@ export default function RSVP() {
             <div className="relative">
             <Image
               src="https://ext.same-assets.com/1904390701/1788928505.svg"
-              alt="RSVP"
+              alt={translate('rsvpSection.headerIconAlt')}
                 width={50}
                 height={50}
                 className="mr-3 opacity-80"
             />
             <Image
               src="https://ext.same-assets.com/1904390701/857206430.svg"
-              alt="RSVP"
+              alt={translate('rsvpSection.headerIconAlt')}
                 width={50}
                 height={50}
                 className="opacity-80"
@@ -159,7 +180,7 @@ export default function RSVP() {
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            RSVP, Doa & Ucapan
+            {translate('rsvpSection.title')}
           </motion.h2>
           
           <motion.p 
@@ -169,7 +190,7 @@ export default function RSVP() {
             transition={{ duration: 0.8, delay: 0.6 }}
             viewport={{ once: true }}
           >
-            Doakan dan berikan ucapan terbaik untuk Kami di hari pernikahan
+            {translate('rsvpSection.subtitle')}
           </motion.p>
         </motion.div>
 
@@ -190,12 +211,12 @@ export default function RSVP() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white" aria-label={translate('rsvpSection.formHeaderIconAlt')}>
                     <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor"/>
                   </svg>
                 </motion.div>
-                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">Konfirmasi Kehadiran</h3>
-                <p className="text-gray-600">Mohon konfirmasi kehadiran Anda</p>
+                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">{translate('rsvpSection.formTitle')}</h3>
+                <p className="text-gray-600">{translate('rsvpSection.formSubtitle')}</p>
               </div>
 
               {error && (
@@ -204,125 +225,125 @@ export default function RSVP() {
                 </div>
               )}
 
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                          <FormLabel className="text-lg font-semibold text-primary">Nama Lengkap</FormLabel>
-                        <FormControl>
-                            <Input 
-                              placeholder="Masukkan nama lengkap" 
-                              {...field} 
-                              className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary transition-colors"
-                            />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="attendance"
-                    render={({ field }) => (
-                      <FormItem>
-                          <FormLabel className="text-lg font-semibold text-primary">Konfirmasi Kehadiran</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
-                          <FormControl>
-                              <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
-                                <SelectValue placeholder="Pilih konfirmasi kehadiran" />
-                            </SelectTrigger>
-                          </FormControl>
-                          <SelectContent>
-                              <SelectItem value="PRESENT">✅ Hadir</SelectItem>
-                              <SelectItem value="NOT_PRESENT">❌ Tidak Hadir</SelectItem>
-                              <SelectItem value="MAYBE">🤔 Belum Pasti</SelectItem>
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                          <FormLabel className="text-lg font-semibold text-primary">Ucapan & Doa</FormLabel>
-                        <FormControl>
-                            <textarea 
-                              placeholder="Tulis ucapan dan doa terbaik untuk kami..."
-                              {...field}
-                              rows={4}
-                              className="w-full rounded-xl border-2 border-gray-200 focus:border-primary transition-colors p-4 resize-none"
-                            />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="terms"
-                    render={({ field }) => (
-                        <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 bg-gray-50 rounded-xl">
-                        <FormControl>
-                          <Checkbox
-                            checked={field.value}
-                            onCheckedChange={field.onChange}
-                              className="mt-1"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">{translate('rsvpSection.labelName')}</FormLabel>
+                      <FormControl>
+                          <Input 
+                            placeholder={translate('rsvpSection.placeholderName')} 
+                            {...field} 
+                            className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary transition-colors"
                           />
-                        </FormControl>
-                        <div className="space-y-1 leading-none">
-                            <FormLabel className="text-sm">
-                              Saya menyetujui bahwa ucapan saya akan ditampilkan di website ini
-                          </FormLabel>
-                        </div>
-                      </FormItem>
-                    )}
-                  />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                    <motion.div
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                    <Button
-                      type="submit"
+                <FormField
+                  control={form.control}
+                  name="attendance"
+                  render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">{translate('rsvpSection.labelAttendance')}</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                            <SelectTrigger className="h-12 rounded-xl border-2 border-gray-200 focus:border-primary">
+                              <SelectValue placeholder={translate('rsvpSection.placeholderAttendance')} />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                              <SelectItem value="PRESENT">{translate('rsvpSection.optionPresent')}</SelectItem>
+                              <SelectItem value="NOT_PRESENT">{translate('rsvpSection.optionNotPresent')}</SelectItem>
+                              <SelectItem value="MAYBE">{translate('rsvpSection.optionMaybe')}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                        <FormLabel className="text-lg font-semibold text-primary">{translate('rsvpSection.labelMessage')}</FormLabel>
+                      <FormControl>
+                          <textarea 
+                            placeholder={translate('rsvpSection.placeholderMessage')}
+                            {...field}
+                            rows={4}
+                            className="w-full rounded-xl border-2 border-gray-200 focus:border-primary transition-colors p-4 resize-none"
+                          />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="terms"
+                  render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4 bg-gray-50 rounded-xl">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                            className="mt-1"
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                          <FormLabel className="text-sm">
+                            {translate('rsvpSection.labelTerms')}
+                        </FormLabel>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                <Button
+                  type="submit"
                       className="w-full h-14 bg-gradient-to-r from-primary to-secondary text-white hover:shadow-xl transition-all duration-300 font-semibold text-lg rounded-xl"
                       disabled={isSubmitted || isLoading}
-                    >
+                >
                       {isLoading ? (
                         <>
-                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true">
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Mengirim...
+                          {translate('rsvpSection.buttonSubmitting')}
                         </>
                       ) : isSubmitted ? (
                         <>
-                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                           </svg>
-                          Terkirim!
+                          {translate('rsvpSection.buttonSuccess')}
                         </>
                       ) : (
                         <>
-                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2" aria-label={translate('rsvpSection.buttonSubmitIconAlt')}>
                             <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                           </svg>
-                          Kirim Ucapan
+                          {translate('rsvpSection.buttonSubmit')}
                         </>
                       )}
-                    </Button>
-                    </motion.div>
-                </form>
-              </Form>
+                </Button>
+                  </motion.div>
+              </form>
+            </Form>
             </div>
           </motion.div>
 
@@ -342,12 +363,14 @@ export default function RSVP() {
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white" aria-label={translate('guestBookSection.headerIconAlt')}>
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor"/>
                   </svg>
                 </motion.div>
-                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">Ucapan & Doa</h3>
-                <p className="text-gray-600">({comments.length} ucapan dari tamu)</p>
+                <h3 className="font-playfair text-2xl lg:text-3xl font-bold text-primary mb-2">{translate('guestBookSection.commentsHeader')}</h3>
+                <p className="text-gray-600">
+                  {translate('guestBookSection.commentsCountPrefix')}{comments.length}{translate('guestBookSection.commentsCountSuffix')}
+                </p>
               </div>
 
               {/* Comments List */}
@@ -367,7 +390,7 @@ export default function RSVP() {
                         <span className="text-white font-bold text-lg">
                           {comment.author.charAt(0).toUpperCase()}
                         </span>
-                      </div>
+                    </div>
                       <div className="flex-1">
                         <div className="flex items-center justify-between mb-2">
                           <h4 className="font-semibold text-lg text-primary">{comment.author}</h4>
@@ -378,9 +401,7 @@ export default function RSVP() {
                               'bg-yellow-500'
                             }`}></div>
                             <span className="text-xs font-medium">
-                              {comment.isPresent === 'PRESENT' ? 'Hadir' : 
-                               comment.isPresent === 'NOT_PRESENT' ? 'Tidak Hadir' : 
-                               'Belum Pasti'}
+                              {getAttendanceDisplay(comment.isPresent)}
                             </span>
                           </div>
                         </div>
@@ -408,15 +429,15 @@ export default function RSVP() {
                     animate={{ rotate: 360 }}
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                   >
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white" aria-label={translate('rsvpSection.bibleQuoteIconAlt')}>
                       <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   </motion.div>
                   <p className="font-playfair text-lg md:text-xl text-primary italic leading-relaxed mb-3">
-                    "Love is patient, love is kind. It does not envy, it does not boast, it is not proud."
+                    {translate('rsvpSection.bibleQuote.text')}
                   </p>
                   <p className="text-sm text-gray-600 font-semibold">
-                    - 1 Corinthians 13:4
+                    {translate('rsvpSection.bibleQuote.reference')}
                   </p>
                 </div>
               </motion.div>

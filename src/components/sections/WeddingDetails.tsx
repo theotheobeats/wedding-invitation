@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { weddingData } from '@/lib/wedding-data';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Animation variants
 const headerVariants = {
@@ -34,6 +35,7 @@ const cardVariants = {
 };
 
 export default function WeddingDetails() {
+  const { translate } = useLanguage();
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -75,6 +77,9 @@ export default function WeddingDetails() {
           viewport={{ once: true }}
           variants={headerVariants}
         >
+          <h2 className="font-playfair text-4xl md:text-5xl text-gray-800 font-semibold">
+            {translate('weddingDetailsSection.title')}
+          </h2>
         </motion.div>
 
         {/* Event Cards */}
@@ -98,7 +103,7 @@ export default function WeddingDetails() {
             <div className="absolute inset-0">
               <Image
                 src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbXqf6wvgDL7tpu5Zbrw18K2ojNhVncqIzeF6S"
-                alt="Couple photo"
+                alt={translate('weddingDetailsSection.eventPhotoAlt')}
                 fill
                 className="object-cover"
               />
@@ -110,7 +115,7 @@ export default function WeddingDetails() {
               {/* Header Section */}
               <div className="p-6 pb-0">
                 <h3 className="font-roboto-slab text-xl text-gray-800 font-medium">
-                  Pemberkatan Pernikahan
+                  {translate('weddingDetailsSection.ceremony')}
                 </h3>
               </div>
 
@@ -123,10 +128,10 @@ export default function WeddingDetails() {
                 </div>
                 <div className="pt-4">
                   <div className="text-lg text-gray-600 font-medium">
-                    Senin
+                    {translate('weddingDetailsSection.dayOfWeekMonday')}
                   </div>
                   <div className="text-lg text-gray-600">
-                    Juni 2025
+                    {translate('weddingDetailsSection.monthYearJune2025')}
                   </div>
                 </div>
               </div>
@@ -135,8 +140,8 @@ export default function WeddingDetails() {
               <div className="bg-black/70 text-white p-6 space-y-4">
                 <div className="flex items-start space-x-4">
                   <div className="flex-1">
-                    <div className="text-sm text-white/90 mb-1">Pukul</div>
-                    <div className="font-medium">{weddingData.events.blessing.time} WIB - selesai</div>
+                    <div className="text-sm text-white/90 mb-1">{translate('weddingDetailsSection.timeLabel')}</div>
+                    <div className="font-medium">{`${weddingData.events.blessing.time} ${translate('weddingDetailsSection.timeSuffixFinish')}`}</div>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start">
@@ -145,7 +150,7 @@ export default function WeddingDetails() {
                         <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                       </svg>
                       <div>
-                        <div className="text-sm text-white/90 mb-1">Tempat</div>
+                        <div className="text-sm text-white/90 mb-1">{translate('weddingDetailsSection.placeLabel')}</div>
                         <div className="font-medium">{weddingData.events.blessing.venue}</div>
                       </div>
                     </div>
@@ -161,7 +166,7 @@ export default function WeddingDetails() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => window.open(weddingData.events.blessing.shareLocation, '_blank')}
               >
-                <span>Google Maps</span>
+                <span>{translate('weddingDetailsSection.viewLocation')}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -189,7 +194,7 @@ export default function WeddingDetails() {
             <div className="absolute inset-0">
               <Image
                 src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbhXWHyLQzkVC1iSYKf8Z5RXnErvwO2aAx6mMU"
-                alt="Couple photo"
+                alt={translate('weddingDetailsSection.eventPhotoAlt')}
                 fill
                 className="object-cover"
               />
@@ -201,7 +206,7 @@ export default function WeddingDetails() {
               {/* Header Section */}
               <div className="p-6 pb-0">
                 <h3 className="font-roboto-slab text-xl text-gray-800 font-medium">
-                  Resepsi
+                  {translate('weddingDetailsSection.reception')}
                 </h3>
               </div>
 
@@ -214,10 +219,10 @@ export default function WeddingDetails() {
                 </div>
                 <div className="pt-4">
                   <div className="text-lg text-gray-600 font-medium">
-                    Senin
+                    {translate('weddingDetailsSection.dayOfWeekMonday')}
                   </div>
                   <div className="text-lg text-gray-600">
-                    Juni 2025
+                    {translate('weddingDetailsSection.monthYearJune2025')}
                   </div>
                 </div>
               </div>
@@ -226,8 +231,8 @@ export default function WeddingDetails() {
               <div className="bg-black/70 text-white p-6 space-y-4">
                 <div className="flex items-start space-x-4">
                   <div className="flex-1">
-                    <div className="text-sm text-white/90 mb-1">Pukul</div>
-                    <div className="font-medium">{weddingData.events.reception.time} WIB - selesai</div>
+                    <div className="text-sm text-white/90 mb-1">{translate('weddingDetailsSection.timeLabel')}</div>
+                    <div className="font-medium">{`${weddingData.events.reception.time} ${translate('weddingDetailsSection.timeSuffixFinish')}`}</div>
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start">
@@ -236,7 +241,7 @@ export default function WeddingDetails() {
                         <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
                       </svg>
                       <div>
-                        <div className="text-sm text-white/90 mb-1">Tempat</div>
+                        <div className="text-sm text-white/90 mb-1">{translate('weddingDetailsSection.placeLabel')}</div>
                         <div className="font-medium">{weddingData.events.reception.venue}</div>
                       </div>
                     </div>
@@ -251,7 +256,7 @@ export default function WeddingDetails() {
                 whileTap={{ scale: 0.98 }}
                 onClick={() => window.open(weddingData.events.reception.shareLocation, '_blank')}
               >
-                <span>Google Maps</span>
+                <span>{translate('weddingDetailsSection.viewLocation')}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

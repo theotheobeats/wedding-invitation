@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { coupleNames } from '@/lib/wedding-data';
+import { weddingData } from '@/lib/wedding-data';
 import FloatingParticles from '../ui/FloatingParticles';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Enhanced animation variants with aesthetic easing
 const containerVariants = {
@@ -113,6 +114,9 @@ const backgroundVariants = {
 };
 
 export default function ThankYou() {
+  const { translate } = useLanguage();
+  const coupleDisplayName = `${weddingData.groom.nickname} ${translate('common.and')} ${weddingData.bride.nickname}`;
+
   return (
     <section className="section-padding py-20 relative overflow-hidden">
       {/* Enhanced Background */}
@@ -130,7 +134,7 @@ export default function ThankYou() {
         />
         <Image
           src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbThibf49mxsjAhVcWMKYR2npEbzBU7fv89qG4"
-          alt="Background"
+          alt={translate('thankYouSection.backgroundAlt')}
           fill
           className="object-cover"
         />
@@ -185,7 +189,7 @@ export default function ThankYou() {
             >
               <Image
                 src="https://ext.same-assets.com/1904390701/898528465.svg"
-                alt="Thank You"
+                alt={translate('thankYouSection.headerIconAlt')}
                 width={80}
                 height={30}
                 className="mx-auto"
@@ -203,7 +207,7 @@ export default function ThankYou() {
               transition: { duration: 0.3 }
             }}
           >
-            Thank You
+            {translate('thankYouSection.title')}
           </motion.h2>
 
           {/* Enhanced Content Card */}
@@ -221,7 +225,7 @@ export default function ThankYou() {
               className="text-center mb-8 text-sm md:text-base leading-relaxed text-gray-700"
               variants={textVariants}
             >
-              Merupakan suatu kebahagia dan kehormatan bagi kami, apabila Bapak/Ibu/Saudara/i, berkenan hadir dan memberikan doa restu kepada kami.
+              {translate('thankYouSection.mainMessage')}
             </motion.p>
 
             <motion.div
@@ -236,7 +240,7 @@ export default function ThankYou() {
                   transition: { duration: 0.3 }
                 }}
               >
-                Kami yang Berbahagia
+                {translate('thankYouSection.happyCoupleSubtitle')}
               </motion.h3>
               
               <motion.h4 
@@ -247,8 +251,15 @@ export default function ThankYou() {
                   transition: { duration: 0.3 }
                 }}
               >
-                {coupleNames}
+                {coupleDisplayName}
               </motion.h4>
+
+              <motion.p 
+                className="text-center text-sm text-gray-600 pt-4"
+                variants={textVariants}
+              >
+                {translate('thankYouSection.closing')}
+              </motion.p>
             </motion.div>
 
             {/* Decorative elements */}
@@ -277,6 +288,19 @@ export default function ThankYou() {
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
               />
             </motion.div>
+          </motion.div>
+
+          {/* Footer */}
+          <motion.div 
+            className="mt-12 text-center"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            <p className="text-xs text-white/70 tracking-wider font-roboto-slab">
+              {translate('thankYouSection.madeWithLove')}
+            </p>
           </motion.div>
         </motion.div>
       </div>

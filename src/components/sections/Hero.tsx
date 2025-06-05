@@ -3,9 +3,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
-import { coupleNames } from '@/lib/wedding-data';
+import { weddingData } from '@/lib/wedding-data';
 import FloatingParticles from '../ui/FloatingParticles';
 import OptimizedImage from '../ui/ImageOptimized';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface HeroProps {
   onOpenInvitation: () => void;
@@ -137,6 +138,9 @@ const qrVariants = {
 
 export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: HeroProps) {
   const [showQR, setShowQR] = useState(false);
+  const { translate } = useLanguage();
+
+  const coupleDisplayName = `${weddingData.groom.nickname} ${translate('common.and')} ${weddingData.bride.nickname}`;
 
   return (
     <motion.div
@@ -199,21 +203,21 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
               className="font-italiana text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90 mt-0"
               variants={subtitleVariants}
             >
-              The Wedding Of
+              {translate('hero.title')}
             </motion.h2>
 
             <motion.h1
               className="heading-1 text-white drop-shadow-2xl px-4"
               variants={titleVariants}
             >
-              {coupleNames}
+              {coupleDisplayName}
             </motion.h1>
 
             <motion.h3
               className="font-roboto-slab text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/90"
               variants={subtitleVariants}
             >
-              16 Juni 2025
+              {translate('hero.date')}
             </motion.h3>
 
             {/* Enhanced Guest Name Display */}
@@ -227,11 +231,10 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
                   transition: { duration: 0.3 }
                 }}
               >
-                <p className="text-white/80 text-sm font-roboto-slab mb-1">Kepada Yth:</p>
+                <p className="text-white/80 text-sm font-roboto-slab mb-1">{translate('hero.invitationTo')}</p>
                 <p className="text-white font-playfair text-lg sm:text-xl font-medium">{guestName}</p>
               </motion.div>
             )}
-
 
           </div>
         </motion.div>
@@ -253,7 +256,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {showQR ? 'Hide QR Code' : 'Show QR Code'}
+                {showQR ? translate('hero.hideQrCode') : translate('hero.showQrCode')}
               </motion.button>
 
               <AnimatePresence mode="wait">
@@ -302,7 +305,7 @@ export default function Hero({ onOpenInvitation, isOpen, guestName, qrCode }: He
             >
               <path d="M13.4 12L8.7 7.3C8.5 7.1 8.5 6.9 8.5 6.7C8.5 6.5 8.6 6.3 8.7 6.1C8.9 5.9 9.1 5.8 9.3 5.8C9.5 5.8 9.7 5.9 9.9 6.1L15.1 11.3C15.3 11.5 15.4 11.7 15.4 12C15.4 12.3 15.3 12.5 15.1 12.7L9.9 17.9C9.7 18.1 9.5 18.2 9.3 18.2C9.1 18.2 8.9 18.1 8.7 17.9C8.5 17.7 8.5 17.5 8.5 17.3C8.5 17.1 8.6 16.9 8.7 16.7L13.4 12Z" fill="white" />
             </motion.svg>
-            <span>Open Invitation</span>
+            <span>{translate('hero.openInvitation')}</span>
           </motion.button>
         </motion.div>
       </div>

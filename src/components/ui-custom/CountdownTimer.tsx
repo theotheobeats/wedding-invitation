@@ -12,9 +12,17 @@ interface TimeLeft {
 
 interface CountdownTimerProps {
   targetDate: Date;
+  labels: {
+    days: string;
+    hours: string;
+    minutes: string;
+    seconds: string;
+    // weddingDay?: string; // Not currently used in this component's rendering
+    // countdownToWedding?: string; // Not currently used here
+  };
 }
 
-export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
+export default function CountdownTimer({ targetDate, labels }: CountdownTimerProps) {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({
     days: 0,
     hours: 0,
@@ -55,10 +63,10 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
   };
 
   const timeUnits = [
-    { value: timeLeft.days, label: 'HARI' },
-    { value: timeLeft.hours, label: 'JAM' },
-    { value: timeLeft.minutes, label: 'MENIT' },
-    { value: timeLeft.seconds, label: 'DETIK' }
+    { value: timeLeft.days, label: labels.days },
+    { value: timeLeft.hours, label: labels.hours },
+    { value: timeLeft.minutes, label: labels.minutes },
+    { value: timeLeft.seconds, label: labels.seconds }
   ];
 
   return (

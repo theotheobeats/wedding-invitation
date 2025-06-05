@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ClientBody from "./ClientBody";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { translations } from "@/lib/translations";
+import LanguageToggle from "@/components/common/LanguageToggle";
 
 export const metadata: Metadata = {
   title: "Eci & Sho Wedding Invitation",
@@ -15,7 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning className="antialiased">
-        <ClientBody>{children}</ClientBody>
+        <LanguageProvider translations={translations}>
+          <ClientBody>{children}</ClientBody>
+          <LanguageToggle />
+        </LanguageProvider>
       </body>
     </html>
   );

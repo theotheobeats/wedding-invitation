@@ -2,13 +2,14 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { weddingData, coupleNames } from '@/lib/wedding-data';
+import { weddingData } from '@/lib/wedding-data';
 import FloatingParticles from '../ui/FloatingParticles';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const timelineItems = [
   {
     id: 1,
-    type: 'text',
+    type: 'text' as const,
     title: weddingData.loveStory.meeting.title,
     date: weddingData.loveStory.meeting.date,
     description: weddingData.loveStory.meeting.description,
@@ -16,14 +17,14 @@ const timelineItems = [
   },
   {
     id: 2,
-    type: 'image',
+    type: 'image' as const,
     title: weddingData.loveStory.meeting.title,
     image: '/IMG_0307.JPG',
     gridClass: 'md:col-span-1 md:row-span-2'
   },
   {
     id: 3,
-    type: 'text',
+    type: 'text' as const,
     title: weddingData.loveStory.commitment.title,
     date: weddingData.loveStory.commitment.date,
     description: weddingData.loveStory.commitment.description,
@@ -31,21 +32,21 @@ const timelineItems = [
   },
   {
     id: 4,
-    type: 'image',
+    type: 'image' as const,
     title: weddingData.loveStory.commitment.title,
     image: '/IMG_0380.JPG',
     gridClass: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 5,
-    type: 'image',
+    type: 'image' as const,
     title: weddingData.loveStory.engagement.title,
     image: '/7c80a5ff-a909-4c6b-b99d-61c09ccdb2a0.jpg',
     gridClass: 'md:col-span-1 md:row-span-1'
   },
   {
     id: 6,
-    type: 'text',
+    type: 'text' as const,
     title: weddingData.loveStory.engagement.title,
     date: weddingData.loveStory.engagement.date,
     description: weddingData.loveStory.engagement.description,
@@ -112,6 +113,8 @@ const quoteVariants = {
 };
 
 export default function LoveStory() {
+  const { language, translate } = useLanguage();
+
   return (
     <section className="relative bg-gray-900 py-20 md:py-32 overflow-hidden">
       {/* Floating Particles */}
@@ -154,7 +157,7 @@ export default function LoveStory() {
             className="font-playfair text-3xl md:text-4xl lg:text-5xl text-white font-medium mb-4"
             variants={headerVariants}
           >
-            Our Love Story
+            {translate('loveStorySection.title')}
           </motion.h2>
         </motion.div>
 
@@ -167,70 +170,75 @@ export default function LoveStory() {
             viewport={{ once: true, margin: "-100px" }}
             variants={containerVariants}
           >
-            {timelineItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                className={`story-card ${item.gridClass} ${item.type === 'image' ? 'image-card' : ''}`}
-                variants={cardVariants}
-                whileHover={{ 
-                  scale: 1.03,
-                  y: -10,
-                  rotateY: item.type === 'image' ? 5 : -5,
-                  transition: { duration: 0.6, ease: "easeOut" }
-                }}
-                onHoverStart={() => {}}
-                onHoverEnd={() => {}}
-              >
-                {item.type === 'text' ? (
-                  <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl h-full">
-                    <motion.div
-                      whileHover={{ y: -3 }}
-                      transition={{ duration: 0.4, ease: "easeOut", stagger: 0.05 }}
-                    >
-                      <span className="inline-block px-4 py-2 bg-primary/20 text-primary-light rounded-full text-sm font-medium mb-6 font-roboto-slab">
-                        {item.date}
-                      </span>
-                      
-                      <h3 className="font-playfair text-2xl md:text-3xl text-white font-medium mb-6 leading-tight">
-                        {item.title}
-                      </h3>
-                      
-                      <p className="text-gray-300 leading-relaxed font-roboto-slab text-base md:text-lg">
-                        {item.description}
-                      </p>
-                    </motion.div>
-                  </div>
-                ) : (
-                  <div className="relative h-full min-h-[400px] md:min-h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
-                    <motion.img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
-                      onError={(e) => {
-                        console.error('Love story image failed to load:', item.image);
-                        e.currentTarget.src = '/IMG_0307.JPG';
-                      }}
-                    />
-                    
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    
-                    {/* Content overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <motion.h3 
-                        className="font-playfair text-xl md:text-2xl text-white font-medium"
+            {timelineItems.map((item, index) => {
+              const currentTitle = item.title[language] || item.title.en;
+              const currentDescription = item.type === 'text' ? (item.description[language] || item.description.en) : '';
+
+              return (
+                <motion.div
+                  key={item.id}
+                  className={`story-card ${item.gridClass} ${item.type === 'image' ? 'image-card' : ''}`}
+                  variants={cardVariants}
+                  whileHover={{ 
+                    scale: 1.03,
+                    y: -10,
+                    rotateY: item.type === 'image' ? 5 : -5,
+                    transition: { duration: 0.6, ease: "easeOut" }
+                  }}
+                  onHoverStart={() => {}}
+                  onHoverEnd={() => {}}
+                >
+                  {item.type === 'text' ? (
+                    <div className="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-sm rounded-3xl p-8 md:p-10 border border-white/10 shadow-2xl h-full">
+                      <motion.div
                         whileHover={{ y: -3 }}
-                        transition={{ duration: 0.4, ease: "easeOut" }}
+                        transition={{ duration: 0.4, ease: "easeOut", stagger: 0.05 }}
                       >
-                        {item.title}
-                      </motion.h3>
+                        <span className="inline-block px-4 py-2 bg-primary/20 text-primary-light rounded-full text-sm font-medium mb-6 font-roboto-slab">
+                          {item.date}
+                        </span>
+                        
+                        <h3 className="font-playfair text-2xl md:text-3xl text-white font-medium mb-6 leading-tight">
+                          {currentTitle}
+                        </h3>
+                        
+                        <p className="text-gray-300 leading-relaxed font-roboto-slab text-base md:text-lg">
+                          {currentDescription}
+                        </p>
+                      </motion.div>
                     </div>
-                  </div>
-                )}
-              </motion.div>
-            ))}
+                  ) : (
+                    <div className="relative h-full min-h-[400px] md:min-h-[500px] rounded-3xl overflow-hidden shadow-2xl group">
+                      <motion.img
+                        src={item.image}
+                        alt={currentTitle}
+                        className="w-full h-full object-cover transition-transform duration-700"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        onError={(e) => {
+                          console.error('Love story image failed to load:', item.image);
+                          e.currentTarget.src = '/IMG_0307.JPG';
+                        }}
+                      />
+                      
+                      {/* Gradient overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                      
+                      {/* Content overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 p-8">
+                        <motion.h3 
+                          className="font-playfair text-xl md:text-2xl text-white font-medium"
+                          whileHover={{ y: -3 }}
+                          transition={{ duration: 0.4, ease: "easeOut" }}
+                        >
+                          {currentTitle}
+                        </motion.h3>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
 

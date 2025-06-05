@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { weddingData } from '@/lib/wedding-data';
 import FloatingParticles from '../ui/FloatingParticles';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const bankAccounts = [
   {
@@ -125,6 +126,7 @@ const accountVariants = {
 };
 
 export default function GiftRegistry() {
+  const { translate } = useLanguage();
   const [showAccounts, setShowAccounts] = useState(false);
 
   return (
@@ -179,17 +181,17 @@ export default function GiftRegistry() {
             >
               <Image
                 src="https://ext.same-assets.com/1904390701/1788928505.svg"
-                alt="Gift"
+                alt={translate('giftSection.headerIconAltGift')}
                 width={50}
                 height={50}
-                className="mr-3 opacity-80"
+                className="mr-3 opacity-80 inline-block"
               />
               <Image
                 src="https://ext.same-assets.com/1904390701/857206430.svg"
-                alt="Registry"
+                alt={translate('giftSection.headerIconAltRegistry')}
                 width={50}
                 height={50}
-                className="opacity-80"
+                className="opacity-80 inline-block"
               />
             </motion.div>
           </motion.div>
@@ -202,14 +204,14 @@ export default function GiftRegistry() {
               transition: { duration: 0.3 }
             }}
           >
-            Wedding Gift
+            {translate('giftSection.title')}
           </motion.h2>
           
           <motion.p 
             className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
             variants={headerVariants}
           >
-            Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Dan jika memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi kado secara cashless.
+            {translate('giftSection.description')}
           </motion.p>
         </motion.div>
 
@@ -244,7 +246,7 @@ export default function GiftRegistry() {
               >
                 <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor"/>
               </motion.svg>
-              <span>{showAccounts ? 'Sembunyikan' : 'Kirim Hadiah'}</span>
+              <span>{showAccounts ? translate('giftSection.buttonHideGift') : translate('giftSection.buttonShowGift')}</span>
             </motion.div>
           </motion.button>
         </motion.div>

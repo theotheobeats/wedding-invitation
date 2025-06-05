@@ -6,18 +6,7 @@ import { motion } from 'framer-motion';
 import { Dialog, DialogContent } from '../ui/dialog';
 import FloatingParticles from '../ui/FloatingParticles';
 import { getGalleryImageUrls } from '@/lib/image-urls';
-
-// Generate gallery images dynamically from available images
-const generateGalleryImages = () => {
-  const availableImages = getGalleryImageUrls();
-  return availableImages.map((src, index) => ({
-    id: index + 1,
-    src,
-    alt: `Gressy & Sho Wedding Photo ${index + 1}`
-  }));
-};
-
-const galleryImages = generateGalleryImages();
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // Animation variants
 const containerVariants = {
@@ -63,7 +52,19 @@ const headerVariants = {
 };
 
 export default function Gallery() {
+  const { translate } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const generateGalleryImages = () => {
+    const availableImages = getGalleryImageUrls();
+    return availableImages.map((src, index) => ({
+      id: index + 1,
+      src,
+      alt: `${translate('gallerySection.imageAltPrefix')} ${index + 1}`
+    }));
+  };
+
+  const galleryImages = generateGalleryImages();
 
   return (
     <section className="relative bg-white py-20 md:py-32 overflow-hidden">
@@ -96,7 +97,7 @@ export default function Gallery() {
           >
             <Image
               src="https://ext.same-assets.com/1904390701/1875536406.svg"
-              alt="Gallery"
+              alt={translate('gallerySection.headerIconAlt')}
               width={100}
               height={40}
               className="mx-auto opacity-80"
@@ -107,7 +108,7 @@ export default function Gallery() {
             className="font-playfair text-3xl md:text-4xl lg:text-5xl text-gray-800 font-medium mb-4"
             variants={headerVariants}
           >
-            Mini Gallery
+            {translate('gallerySection.title')}
           </motion.h2>
         </motion.div>
 
@@ -180,7 +181,7 @@ export default function Gallery() {
                             <path d="M15 3h4a2 2 0 0 1 2 2v4m-6 0L21 3m-11 18h-4a2 2 0 0 1-2-2v-4m6 0L3 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </motion.div>
-                        <p className="text-sm font-medium font-roboto-slab">View Photo</p>
+                        <p className="text-sm font-medium font-roboto-slab">{translate('gallerySection.viewPhotoHover')}</p>
                       </div>
                     </motion.div>
                   </div>
@@ -198,7 +199,7 @@ export default function Gallery() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            <p className="text-gray-600 text-lg">No gallery images available at the moment.</p>
+            <p className="text-gray-600 text-lg">{translate('gallerySection.emptyMessage')}</p>
           </motion.div>
         )}
 
@@ -215,7 +216,7 @@ export default function Gallery() {
               >
                 <img
                   src={selectedImage}
-                  alt="Gallery preview"
+                  alt={translate('gallerySection.dialogPreviewAlt')}
                   className="w-full h-full object-contain"
                 />
 

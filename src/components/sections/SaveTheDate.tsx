@@ -4,8 +4,20 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CountdownTimer from '../ui-custom/CountdownTimer';
 import { weddingDate } from '@/lib/wedding-data';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function SaveTheDate() {
+  const { translate } = useLanguage();
+
+  const countdownLabels = {
+    days: translate('saveTheDateSection.days'),
+    hours: translate('saveTheDateSection.hours'),
+    minutes: translate('saveTheDateSection.minutes'),
+    seconds: translate('saveTheDateSection.seconds'),
+    weddingDay: translate('saveTheDateSection.weddingDay'),
+    countdownToWedding: translate('saveTheDateSection.countdownToWedding')
+  };
+
   return (
     <div className="relative min-h-screen bg-zinc-900 text-white overflow-hidden">
       <div className="relative z-10 min-h-screen flex items-center">
@@ -21,9 +33,9 @@ export default function SaveTheDate() {
                   transition={{ duration: 0.8, ease: "easeOut" }}
                   viewport={{ once: true }}
                 >
-                  Menghitung
+                  {translate('saveTheDateSection.titleLine1')}
                   <br />
-                  <span className="inline-block">Hari</span>
+                  <span className="inline-block">{translate('saveTheDateSection.titleLine2')}</span>
                 </motion.h1>
 
                 <motion.div
@@ -34,10 +46,10 @@ export default function SaveTheDate() {
                   viewport={{ once: true }}
                 >
                   <p className="text-sm md:text-base leading-relaxed font-roboto-slab text-white">
-                    "Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh."
+                    {translate('saveTheDateSection.quote')}
                   </p>
                   <p className="mt-4 font-medium font-roboto-slab text-white">
-                    Genesis 2:24
+                    {translate('saveTheDateSection.quoteRef')}
                   </p>
                 </motion.div>
               </div>
@@ -54,7 +66,7 @@ export default function SaveTheDate() {
                 <div className="relative w-full h-full rounded-lg overflow-hidden shadow-2xl">
                   <Image
                     src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb81liXsxMqlXk5KLSTw0ZaeyhzjRcCbFJNsf2"
-                    alt="Couple photo"
+                    alt={translate('saveTheDateSection.couplePhotoAlt')}
                     fill
                     className="object-cover"
                   />
@@ -74,7 +86,7 @@ export default function SaveTheDate() {
                 viewport={{ once: true }}
                 >
                 <div>
-                  <CountdownTimer targetDate={weddingDate} />
+                  <CountdownTimer targetDate={weddingDate} labels={countdownLabels} />
                 </div>
               </motion.div>
             </div>
@@ -90,7 +102,7 @@ export default function SaveTheDate() {
         >
           <Image
             src="https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdb9PoITsHeOalHmg4Rnyt6Whs1UXrLdiEPMK3D"
-            alt="Background"
+            alt={translate('saveTheDateSection.backgroundAlt')}
             fill
             className="object-cover object-center"
           />
