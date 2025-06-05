@@ -170,7 +170,7 @@ export const translations = {
     weddingDetailsSection: {
         title: "Wedding Details",
         reception: "Reception",
-        ceremony: "Blessing Ceremony",
+        ceremony: "Holy Matrimony",
         viewLocation: "View on Google Maps",
         dayOfWeekMonday: "Monday",
         monthYearJune2025: "June 2025",
