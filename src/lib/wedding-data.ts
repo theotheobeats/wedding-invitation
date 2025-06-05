@@ -141,9 +141,9 @@ export const weddingData: WeddingData = {
     },
     engagement: {
       title: {
-        id: "Lamaran (Segera)",
-        en: "Engagement (Soon)",
-        ja: "婚約（近日公開）"
+        id: "Lamaran",
+        en: "Engagement",
+        ja: "婚約"
       },
       date: "2025",
       description: {
