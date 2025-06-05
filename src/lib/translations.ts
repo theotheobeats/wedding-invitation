@@ -129,7 +129,9 @@ export const translations = {
         bibleQuote: {
             text: "Karena itu seorang laki-lakinya dan ibunya dan bersatu dengan isterinya, sehingga keduanya menjadi satu daging.",
             reference: "Kejadian 2:24",
-        }
+        },
+        labelName: "Nama",
+        labelMessage: "Pesan",
     }
   },
   en: {
@@ -261,7 +263,9 @@ export const translations = {
         bibleQuote: {
             text: "Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh.",
             reference: "Genesis 2:24",
-        }
+        },
+        labelName: "Name",
+        labelMessage: "Message",
     }
   },
   ja: {
@@ -393,7 +397,9 @@ export const translations = {
         bibleQuote: {
             text: "それゆえ、男はその父母を離れ、妻と結ばれ、ふたりは一体となるのである。",
             reference: "創世記 2:24",
-        }
+        },
+        labelName: "名前",
+        labelMessage: "メッセージ",
     }
   }
 }; 
