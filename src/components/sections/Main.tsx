@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { fetchAttendeeByCode } from '@/lib/api';
 import { Attendee } from '@/lib/types';
+import { useMusic } from '@/contexts/MusicContext';
 import CoupleIntro from './CoupleIntro';
 import Gallery from './Gallery';
 import GiftRegistry from './GiftRegistry';
@@ -21,6 +22,7 @@ export default function Main() {
   const [attendee, setAttendee] = useState<Attendee | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { startMusic } = useMusic();
 
   useEffect(() => {
     const fetchAttendee = async () => {
@@ -67,6 +69,8 @@ export default function Main() {
 
   const handleOpenInvitation = () => {
     setIsInvitationOpen(true);
+    // Start background music when invitation is opened
+    startMusic();
     // Auto scroll to top of invitation content
     setTimeout(() => {
       window.scrollTo({
