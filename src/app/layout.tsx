@@ -5,7 +5,6 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import { MusicProvider } from "@/contexts/MusicContext";
 import { translations } from "@/lib/translations";
 import LanguageToggle from "@/components/common/LanguageToggle";
-import MusicToggle from "@/components/common/MusicToggle";
 
 export const metadata: Metadata = {
   title: "Eci & Sho Wedding Invitation",
@@ -24,7 +23,6 @@ export default function RootLayout({
           <MusicProvider>
             <ClientBody>{children}</ClientBody>
             <LanguageToggle />
-            <MusicToggle />
           </MusicProvider>
         </LanguageProvider>
       </body>

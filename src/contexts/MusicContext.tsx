@@ -1,32 +1,23 @@
 'use client';
 
-import React, { createContext, useState, useContext, ReactNode, useRef, useEffect } from 'react';
+import React, { createContext, useContext, ReactNode, useRef, useEffect } from 'react';
 
-interface MusicContextType {
-  isPlaying: boolean;
-  togglePlay: () => void;
-  setVolume: (volume: number) => void;
-  volume: number;
-}
-
-const MusicContext = createContext<MusicContextType | undefined>(undefined);
+const MusicContext = createContext<{} | undefined>(undefined);
 
 export const MusicProvider = ({ children }: { children: ReactNode }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolumeState] = useState(0.3); // 30% volume by default
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Create audio element
     audioRef.current = new Audio('/bg_song.mp3');
     audioRef.current.loop = true;
-    audioRef.current.volume = volume;
+    audioRef.current.volume = 0.3; // 30% volume by default
     
     // Auto-play music when component mounts
     const playMusic = async () => {
       try {
         await audioRef.current?.play();
-        setIsPlaying(true);
+        console.log('Background music started');
       } catch (error) {
         console.warn('Auto-play failed, user interaction required:', error);
       }
@@ -43,40 +34,8 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     };
   }, []);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  const togglePlay = async () => {
-    if (!audioRef.current) return;
-
-    try {
-      if (isPlaying) {
-        audioRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        await audioRef.current.play();
-        setIsPlaying(true);
-      }
-    } catch (error) {
-      console.warn('Audio play failed:', error);
-    }
-  };
-
-  const setVolume = (newVolume: number) => {
-    const clampedVolume = Math.max(0, Math.min(1, newVolume));
-    setVolumeState(clampedVolume);
-  };
-
   return (
-    <MusicContext.Provider value={{
-      isPlaying,
-      togglePlay,
-      setVolume,
-      volume
-    }}>
+    <MusicContext.Provider value={{}}>
       {children}
     </MusicContext.Provider>
   );
