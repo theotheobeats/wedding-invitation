@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, ReactNode, useRef, useEffect } from 'react';
 
-const MusicContext = createContext<{} | undefined>(undefined);
+const MusicContext = createContext<{ initialized: boolean } | undefined>(undefined);
 
 export const MusicProvider = ({ children }: { children: ReactNode }) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -11,7 +11,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
     // Create audio element
     audioRef.current = new Audio('/bg_song.mp3');
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.3; // 30% volume by default
+    audioRef.current.volume = 0.5; // 50% volume by default
     
     // Auto-play music when component mounts
     const playMusic = async () => {
@@ -35,7 +35,7 @@ export const MusicProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <MusicContext.Provider value={{}}>
+    <MusicContext.Provider value={{ initialized: true }}>
       {children}
     </MusicContext.Provider>
   );
