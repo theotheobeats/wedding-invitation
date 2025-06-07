@@ -263,7 +263,7 @@ export default function LoveStory() {
               </motion.div>
               
               <blockquote className="font-playfair text-xl md:text-2xl lg:text-3xl text-white italic leading-relaxed mb-6">
-                "Cinta sejati adalah ketika dua hati bertemu dan memutuskan untuk berjalan bersama selamanya"
+                {translate('loveStorySection.quote')}
               </blockquote>
               
               <p className="text-gray-300 font-medium font-roboto-slab">

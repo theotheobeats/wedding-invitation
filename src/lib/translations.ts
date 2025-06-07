@@ -46,6 +46,7 @@ export const translations = {
     },
     loveStorySection: {
         title: "Kisah Cinta Kami",
+        quote: "Cinta sejati adalah ketika dua hati bertemu dan memutuskan untuk berjalan bersama selamanya",
         // Stories will be populated dynamically but we might need fallbacks or general titles
     },
     gallerySection: {
@@ -127,7 +128,7 @@ export const translations = {
         errorSubmit: "Gagal mengirim pesan Anda. Silakan coba lagi.",
         successMessage: "Konfirmasi & ucapan Anda telah berhasil dikirim!",
         bibleQuote: {
-            text: "Karena itu seorang laki-lakinya dan ibunya dan bersatu dengan isterinya, sehingga keduanya menjadi satu daging.",
+            text: "Karena itu seorang laki-laki akan meninggalkan ayahnya dan ibunya dan bersatu dengan isterinya, sehingga keduanya menjadi satu daging.",
             reference: "Kejadian 2:24",
         },
         labelName: "Nama",
@@ -181,6 +182,7 @@ export const translations = {
     },
     loveStorySection: {
         title: "Our Love Story",
+        quote: "True love is when two hearts meet and decide to walk together forever",
     },
     gallerySection: {
         title: "Mini Gallery",
@@ -315,6 +317,7 @@ export const translations = {
     },
     loveStorySection: {
         title: "私たちのラブストーリー",
+        quote: "真の愛は、二人の心が出会い、永遠に一緒に歩むことを決めたときに始まる",
     },
     gallerySection: {
         title: "ミニギャラリー",
