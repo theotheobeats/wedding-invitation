@@ -143,7 +143,7 @@ export const translations = {
       bride: "Bride's Name",
       date: "JUNE 16, 2025",
       saveTheDate: "Save The Date",
-      invitationTo: "Dear Mr./Mrs./Ms.",
+      invitationTo: "Dear",
       guestPlaceholder: "Guest Name",
       openInvitation: "Open Invitation",
       showQrCode: "Show QR Code",
