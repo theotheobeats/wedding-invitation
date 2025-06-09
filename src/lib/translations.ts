@@ -94,7 +94,7 @@ export const translations = {
         happyCoupleSubtitle: "Kami yang Berbahagia",
         signature: "Pasangan Pengantin",
         closing: "Atas kehadiran dan doa restu, kami mengucapkan terima kasih.",
-        madeWithLove: "Dibuat dengan ❤️ oleh Valen",
+        madeWithLove: "Dibuat dengan ❤️ oleh",
         headerIconAlt: "Ikon Terima Kasih",
         backgroundAlt: "Latar Belakang Terima Kasih"
     },
@@ -229,7 +229,7 @@ export const translations = {
         happyCoupleSubtitle: "With Love, The Happy Couple",
         signature: "The Newlyweds",
         closing: "For your presence and blessings, we thank you.",
-        madeWithLove: "Made with ❤️ by Valen",
+        madeWithLove: "Made with ❤️ by",
         headerIconAlt: "Thank You Icon",
         backgroundAlt: "Thank You Background"
     },
@@ -364,7 +364,7 @@ export const translations = {
         happyCoupleSubtitle: "愛を込めて、幸せな二人より",
         signature: "新郎新婦",
         closing: "ご出席と祝福に対し、心より感謝申し上げます。",
-        madeWithLove: "ヴァレンが心を込めて作りました❤️",
+        madeWithLove: "作りました❤️",
         headerIconAlt: "感謝アイコン",
         backgroundAlt: "感謝の背景"
     },
