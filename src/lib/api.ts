@@ -27,7 +27,7 @@ export interface CommentSubmission {
  */
 export async function fetchAttendeeByCode(code: string): Promise<AttendeeResponse> {
   try {
-    const response = await fetch(`https://j8wow48gsgwwg4soggskc0kc.theoprathama.com/api/attendees/${code}`);
+    const response = await fetch(`https://qrinv.vercel.app/api/attendees/${code}`);
     const data = await response.json();
     
     if (!response.ok) {
@@ -54,7 +54,7 @@ export async function fetchAttendeeByCode(code: string): Promise<AttendeeRespons
 // Function to fetch all comments
 export async function fetchComments(): Promise<Comment[]> {
   try {
-    const response = await fetch(`https://j8wow48gsgwwg4soggskc0kc.theoprathama.com/api/comments`);
+    const response = await fetch(`https://qrinv.vercel.app/api/comments`);
     if (!response.ok) {
       throw new Error('Failed to fetch comments');
     }
@@ -68,7 +68,7 @@ export async function fetchComments(): Promise<Comment[]> {
 // Function to submit a new comment
 export async function submitComment(comment: CommentSubmission): Promise<Comment> {
   try {
-    const response = await fetch(`https://j8wow48gsgwwg4soggskc0kc.theoprathama.com/api/comments`, {
+    const response = await fetch(`https://qrinv.vercel.app/api/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
