@@ -69,12 +69,12 @@ export const weddingData: WeddingData = {
     nickname: "Gressy",
     fullName: "Gressy Lasria Silitonga",
     parentInfo: {
-      id: "Putri pertama dari Bapak",
-      en: "The first daughter of Mr.",
+      id: "Putri pertama dari",
+      en: "The first daughter of",
       ja: "様ご夫妻の長女"
     },
-    father: "Rexson Pernando Silitonga",
-    mother: "Hayati Pelita Pasaribu",
+    father: "Mr. Rexson Pernando Silitonga",
+    mother: "Mrs. Hayati Pelita Pasaribu",
     instagram: "gressychia_",
     photo: "https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbIQBtJjXaKL9NjAoB0Z6CYvwbuVFQWUXzxqIe"
   },
@@ -82,12 +82,12 @@ export const weddingData: WeddingData = {
     nickname: "Sho",
     fullName: "Sho Kishimoto",
     parentInfo: {
-      id: "Putra pertama dari Bapak",
-      en: "The first son of Mr.",
+      id: "Putra pertama dari",
+      en: "The first son of",
       ja: "様ご夫妻の長男"
     },
-    father: "Youji Kishimoto",
-    mother: "Ikuyo Kishimoto",
+    father: "Mr. Youji Kishimoto",
+    mother: "Mrs. Ikuyo Kishimoto",
     instagram: "",
     photo: "https://s4smxmfvbu.ufs.sh/f/M87ztnPlGzdbGshH14OCfFdA9jbwVolHW4nXs8pSuROYk06e"
   },
