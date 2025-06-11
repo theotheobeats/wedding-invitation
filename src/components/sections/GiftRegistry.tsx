@@ -1,7 +1,6 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { weddingData } from '@/lib/wedding-data';
 import FloatingParticles from '../ui/FloatingParticles';
@@ -127,7 +126,6 @@ const accountVariants = {
 
 export default function GiftRegistry() {
   const { translate } = useLanguage();
-  const [showAccounts, setShowAccounts] = useState(false);
 
   return (
     <section className="relative section-padding py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
@@ -215,52 +213,14 @@ export default function GiftRegistry() {
           </motion.p>
         </motion.div>
 
-        {/* Enhanced Gift Button */}
-        <motion.div 
-          className="text-center mb-12"
+        {/* Enhanced Account Cards */}
+        <motion.div
+          className="flex justify-center mt-8 sm:mt-10 md:mt-12"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
         >
-          <motion.button
-            className="bg-gradient-to-r from-primary to-secondary text-white px-8 sm:px-12 py-4 sm:py-5 rounded-full font-medium text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all duration-300 border border-white/20"
-            onClick={() => setShowAccounts(!showAccounts)}
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            <motion.div 
-              className="flex items-center gap-3"
-              animate={{ x: showAccounts ? 0 : [0, 3, 0] }}
-              transition={{ duration: 2, repeat: showAccounts ? 0 : Infinity, ease: "easeInOut" }}
-            >
-              <motion.svg 
-                width="20" 
-                height="20" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                animate={{ rotate: showAccounts ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" fill="currentColor"/>
-              </motion.svg>
-              <span>{showAccounts ? translate('giftSection.buttonHideGift') : translate('giftSection.buttonShowGift')}</span>
-            </motion.div>
-          </motion.button>
-        </motion.div>
-
-        {/* Enhanced Account Cards */}
-        <AnimatePresence>
-          {showAccounts && (
-            <motion.div
-              className="flex justify-center mt-8 sm:mt-10 md:mt-12"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={containerVariants}
-            >
               {bankAccounts.map((account) => (
                 <motion.div
                   key={account.id}
@@ -390,9 +350,7 @@ export default function GiftRegistry() {
                   </motion.div>
                 </motion.div>
               ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
